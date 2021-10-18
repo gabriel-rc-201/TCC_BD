@@ -1,0 +1,12 @@
+{
+  "name": "TCC_BD",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/gabriel-rc-201/TCC_BD.git",
+  "author": "gabrieldk <ganriel201@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.4.4"
+  }
+}
