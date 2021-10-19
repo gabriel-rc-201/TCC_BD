@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryColumn } from "typeorm";
 
 @Entity("areaEstudo")
-class Areaestudo {
+class AreaEstudo {
   @PrimaryColumn()
   id: string;
 
@@ -9,4 +9,4 @@ class Areaestudo {
   name: string;
 }
 
-export { Areaestudo };
+export { AreaEstudo };
