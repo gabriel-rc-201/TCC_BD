@@ -1,12 +1,12 @@
 import { Column, Entity, PrimaryColumn } from "typeorm";
 
-@Entity("areaEstudo")
+@Entity("areaestudo")
 class AreaEstudo {
   @PrimaryColumn()
   id: string;
 
   @Column()
-  name: string;
+  nome: string;
 }
 
 export { AreaEstudo };

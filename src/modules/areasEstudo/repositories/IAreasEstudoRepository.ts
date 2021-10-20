@@ -2,13 +2,13 @@ import { AreaEstudo } from "../entities/areasEstudo";
 
 interface ICreateAreaEstudoDTO {
   id: string;
-  name: string;
+  nome: string;
 }
 
 interface IAreaEstudoRepository {
   findById(id: string): Promise<AreaEstudo>;
   list(): Promise<AreaEstudo[]>;
-  create({ id, name }: ICreateAreaEstudoDTO): Promise<void>;
+  create({ id, nome }: ICreateAreaEstudoDTO): Promise<void>;
 }
 
 export { ICreateAreaEstudoDTO, IAreaEstudoRepository };

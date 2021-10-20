@@ -5,7 +5,7 @@ import { IAreaEstudoRepository } from "../../repositories/IAreasEstudoRepository
 
 interface IImportAreaEstudo {
   id: string;
-  name: string;
+  nome: string;
 }
 
 @injectable()
@@ -26,8 +26,8 @@ class ImportAreasEstudoUseCase {
 
       parseFile
         .on("data", async (line) => {
-          const [id, name] = line;
-          areasEstudo.push({ id, name });
+          const [id, nome] = line;
+          areasEstudo.push({ id, nome });
         })
         .on("end", () => {
           fs.promises.unlink(file.path);
@@ -43,12 +43,12 @@ class ImportAreasEstudoUseCase {
     const areasEstudo = await this.loadAreasEstudo(file);
 
     areasEstudo.map(async (areaEstudo) => {
-      const { id, name } = areaEstudo;
+      const { id, nome } = areaEstudo;
 
       const existAreaEstudo = await this.areasEstudoRepository.findById(id);
 
       if (!existAreaEstudo) {
-        await this.areasEstudoRepository.create({ id, name });
+        await this.areasEstudoRepository.create({ id, nome });
       }
     });
   }

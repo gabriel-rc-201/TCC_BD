@@ -22,8 +22,8 @@ class AreasEstudoRepository implements IAreaEstudoRepository {
     return areasEstudos;
   }
 
-  async create({ id, name }: ICreateAreaEstudoDTO): Promise<void> {
-    const areaEstudo = this.repository.create({ id, name });
+  async create({ id, nome }: ICreateAreaEstudoDTO): Promise<void> {
+    const areaEstudo = this.repository.create({ id, nome });
     await this.repository.save(areaEstudo);
   }
 }
