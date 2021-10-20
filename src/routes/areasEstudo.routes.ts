@@ -2,6 +2,7 @@ import { Router } from "express";
 import multer from "multer";
 
 import { ImportAreaEstudoController } from "../modules/areasEstudo/useCases/importAreaEstudo/ImportAreaEstudoController";
+import { ListAreasEstudoController } from "../modules/areasEstudo/useCases/listAreasEstudo/ListAreasEstudoController";
 
 const areasEstudoRoutes = Router();
 
@@ -10,10 +11,9 @@ const upload = multer({
 });
 
 const importAreaEstudoController = new ImportAreaEstudoController();
+const listAreasEstudoController = new ListAreasEstudoController();
 
-areasEstudoRoutes.get("/", (req, res) => {
-  return res.json({ mensage: "Hello from areas de Estudo GET" });
-});
+areasEstudoRoutes.get("/", listAreasEstudoController.handle);
 
 areasEstudoRoutes.post(
   "/import",
