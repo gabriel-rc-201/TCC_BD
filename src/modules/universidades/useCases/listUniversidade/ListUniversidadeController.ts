@@ -1,15 +1,17 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { ListAreasEstudoUseCase } from "./ListAreasEstudoUseCase";
+import { ListUniversidadeUseCase } from "./ListUniversidadeUseCase";
 
-class ListAreasEstudoController {
+class ListUniversidadeController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const listAreasEstudoUseCase = container.resolve(ListAreasEstudoUseCase);
+    const listUniversidadeController = container.resolve(
+      ListUniversidadeUseCase
+    );
 
-    const all = await listAreasEstudoUseCase.execute();
+    const all = await listUniversidadeController.execute();
 
     return res.json(all);
   }
 }
 
-export { ListAreasEstudoController };
+export { ListUniversidadeController };
