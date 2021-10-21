@@ -6,7 +6,7 @@ interface IUniversidadeDTO {
 }
 
 interface IUniversidadeRepository {
-  findById(id: Number): Promise<Universidade>;
+  findByNome(nome: string): Promise<Universidade>;
   list(): Promise<Universidade[]>;
   create({ nome, cnpj }: IUniversidadeDTO): Promise<void>;
 }

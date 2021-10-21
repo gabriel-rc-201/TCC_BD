@@ -12,8 +12,8 @@ class UniversidadeRepository implements IUniversidadeRepository {
     this.repository = getRepository(Universidade);
   }
 
-  async findById(id: Number): Promise<Universidade> {
-    const universidade = await this.repository.findOne({ id });
+  async findByNome(nome: string): Promise<Universidade> {
+    const universidade = await this.repository.findOne({ nome });
     return universidade;
   }
 
