@@ -15,14 +15,17 @@ class CreateUniversidadeUseCase {
 
   async execute({ nome, cnpj }: IRequest): Promise<void> {
     const universidadeExists = await this.universidadeRepository.findByCnpj(
-      nome
+      cnpj
     );
 
     if (universidadeExists) {
       throw new Error("Universidade ja está registrada");
     }
 
-    this.universidadeRepository.create({ nome, cnpj });
+    const id =
+      parseInt((await this.universidadeRepository.findMaxId()).toString()) + 1;
+
+    this.universidadeRepository.create({ id, nome, cnpj });
   }
 }
 
