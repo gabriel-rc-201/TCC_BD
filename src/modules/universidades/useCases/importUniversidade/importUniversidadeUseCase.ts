@@ -54,8 +54,6 @@ class ImportUniversidadeUseCase {
       );
 
       if (!existAreaEstudo) {
-        console.log({ id });
-
         id++;
 
         await this.universidadeRepository.create({ id, nome, cnpj });
