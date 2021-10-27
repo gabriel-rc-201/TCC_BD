@@ -5,7 +5,10 @@
   "username": "postgres",
   "password": "postgres",
   "database": "postgres",
-  "entities": ["./src/modules/areasEstudo/entities/*.ts"],
+  "entities": [
+    "./src/modules/areasEstudo/entities/*.ts",
+    "./src/modules/universidades/entities/*.ts"
+  ],
   "migrations": ["./src/database/migrations/*.ts"],
   "cli": {
     "migrationsDir": "./src/database/migrations"

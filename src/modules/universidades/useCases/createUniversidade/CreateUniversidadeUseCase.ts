@@ -14,7 +14,7 @@ class CreateUniversidadeUseCase {
   ) {}
 
   async execute({ nome, cnpj }: IRequest): Promise<void> {
-    const universidadeExists = await this.universidadeRepository.findByNome(
+    const universidadeExists = await this.universidadeRepository.findByCnpj(
       nome
     );
 

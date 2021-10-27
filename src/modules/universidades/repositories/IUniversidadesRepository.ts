@@ -1,14 +1,16 @@
 import { Universidade } from "../entities/universidades";
 
 interface IUniversidadeDTO {
+  id: number;
   nome: string;
   cnpj: string;
 }
 
 interface IUniversidadeRepository {
-  findByNome(nome: string): Promise<Universidade>;
+  findByCnpj(cnpj: string): Promise<Universidade>;
   list(): Promise<Universidade[]>;
-  create({ nome, cnpj }: IUniversidadeDTO): Promise<void>;
+  create({ id, nome, cnpj }: IUniversidadeDTO): Promise<void>;
+  findMaxId(): Promise<number>;
 }
 
 export { IUniversidadeDTO, IUniversidadeRepository };
