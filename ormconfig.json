@@ -7,7 +7,8 @@
   "database": "postgres",
   "entities": [
     "./src/modules/areasEstudo/entities/*.ts",
-    "./src/modules/universidades/entities/*.ts"
+    "./src/modules/universidades/entities/*.ts",
+    "./src/modules/accounts/entities/*.ts"
   ],
   "migrations": ["./src/database/migrations/*.ts"],
   "cli": {
