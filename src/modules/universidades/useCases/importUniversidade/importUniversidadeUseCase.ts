@@ -40,17 +40,25 @@ class ImportUniversidadeUseCase {
   }
 
   async execute(file: Express.Multer.File): Promise<void> {
-    const universidade = await this.loadUniversidade(file);
+    const universidades = await this.loadUniversidade(file);
 
-    universidade.map(async (universidade) => {
+    let id = parseInt(
+      (await this.universidadeRepository.findMaxId()).toString()
+    );
+
+    universidades.map(async (universidade) => {
       const { nome, cnpj } = universidade;
 
-      const existAreaEstudo = await this.universidadeRepository.findByNome(
-        nome
+      const existAreaEstudo = await this.universidadeRepository.findByCnpj(
+        cnpj
       );
 
       if (!existAreaEstudo) {
-        await this.universidadeRepository.create({ nome, cnpj });
+        console.log({ id });
+
+        id++;
+
+        await this.universidadeRepository.create({ id, nome, cnpj });
       }
     });
   }
