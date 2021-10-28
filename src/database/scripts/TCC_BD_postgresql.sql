@@ -100,7 +100,8 @@ CREATE TABLE orientador
     id    INTEGER NOT NULL ,
     nome  VARCHAR NOT NULL ,
     senha VARCHAR NOT NULL ,
-    email VARCHAR NOT NULL
+    email VARCHAR NOT NULL ,
+    matricula_siape VARCHAR NOT NULL
   ) ;
 ALTER TABLE orientador ADD CONSTRAINT Orientador_PK PRIMARY KEY ( id ) ;
 
