@@ -4,11 +4,9 @@ import { ListUniversidadeUseCase } from "./ListUniversidadeUseCase";
 
 class ListUniversidadeController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const listUniversidadeController = container.resolve(
-      ListUniversidadeUseCase
-    );
+    const listUniversidadeUseCase = container.resolve(ListUniversidadeUseCase);
 
-    const all = await listUniversidadeController.execute();
+    const all = await listUniversidadeUseCase.execute();
 
     return res.json(all);
   }

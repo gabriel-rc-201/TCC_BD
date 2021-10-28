@@ -4,11 +4,9 @@ import { ListOrientadoresUseCase } from "./ListOrientadoresUseCase";
 
 class ListOrientadoresController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const listOrientadoresController = container.resolve(
-      ListOrientadoresUseCase
-    );
+    const listOrientadoresUseCase = container.resolve(ListOrientadoresUseCase);
 
-    const all = await listOrientadoresController.execute();
+    const all = await listOrientadoresUseCase.execute();
 
     return res.json(all);
   }
