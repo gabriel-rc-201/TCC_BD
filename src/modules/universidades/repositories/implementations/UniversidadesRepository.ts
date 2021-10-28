@@ -25,14 +25,13 @@ class UniversidadeRepository implements IUniversidadeRepository {
   }
 
   async findMaxId(): Promise<number> {
-    const bd = await this.list();
-    if (bd.length === 0) return 0;
-
     const ids = await this.repository.find({
       select: ["id"],
       order: { id: "DESC" },
       take: 1,
     });
+
+    if (ids.length === 0) return 0;
 
     const idNumber = ids[0].id;
 
