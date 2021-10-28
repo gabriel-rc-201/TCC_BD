@@ -10,6 +10,14 @@ class OrientadoresRepository implements IOrientadoresRepository {
     this.repository = getRepository(Orientadores);
   }
 
+  list(): Promise<Orientadores[]> {
+    const orientadores = this.repository.find({
+      select: ["nome", "email"],
+    });
+
+    return orientadores;
+  }
+
   async create({
     id,
     email,
