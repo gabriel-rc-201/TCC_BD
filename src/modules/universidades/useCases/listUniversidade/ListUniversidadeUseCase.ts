@@ -6,11 +6,11 @@ import { IUniversidadeRepository } from "../../repositories/IUniversidadesReposi
 class ListUniversidadeUseCase {
   constructor(
     @inject("UniversidadeRepository")
-    private areasUniversidadeRepository: IUniversidadeRepository
+    private universidadeRepository: IUniversidadeRepository
   ) {}
 
   async execute(): Promise<Universidade[]> {
-    const universidades = await this.areasUniversidadeRepository.list();
+    const universidades = await this.universidadeRepository.list();
 
     return universidades;
   }
