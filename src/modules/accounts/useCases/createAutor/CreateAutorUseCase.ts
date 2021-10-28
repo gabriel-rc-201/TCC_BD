@@ -1,7 +1,6 @@
 import { inject, injectable } from "tsyringe";
 import { hash } from "bcrypt";
 
-import { IAutoresDTO } from "../../dtos/IAutoresDTO";
 import { IAutoresRepository } from "../../repositories/IAutoresRepository";
 
 interface IRequest {
