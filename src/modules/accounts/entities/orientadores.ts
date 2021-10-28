@@ -13,6 +13,9 @@ class Orientadores {
 
   @Column()
   email: string;
+
+  @Column()
+  matricula_siape: string;
 }
 
 export { Orientadores };
