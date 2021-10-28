@@ -1,5 +1,5 @@
 -- Gerado por Oracle SQL Developer Data Modeler 4.1.3.901
---   em:        2021-10-13 09:41:14 BRT
+--   em:        2021-10-28 10:44:28 BRT
 --   site:      Oracle Database 11g
 --   tipo:      Oracle Database 11g
 
@@ -92,10 +92,11 @@ ALTER TABLE orientacao ADD CONSTRAINT orientacao_PK PRIMARY KEY ( autorId, orien
 
 CREATE TABLE orientador
   (
-    id    INTEGER NOT NULL ,
-    nome  VARCHAR2 (50) NOT NULL ,
-    senha VARCHAR2 (20 BYTE) NOT NULL ,
-    email VARCHAR2 (60 BYTE) NOT NULL
+    id              INTEGER NOT NULL ,
+    nome            VARCHAR2 (50) NOT NULL ,
+    senha           VARCHAR2 (20 BYTE) NOT NULL ,
+    email           VARCHAR2 (60 BYTE) NOT NULL ,
+    matricula_siape VARCHAR2 (15 BYTE) NOT NULL
   ) ;
 ALTER TABLE orientador ADD CONSTRAINT Orientador_PK PRIMARY KEY ( id ) ;
 
