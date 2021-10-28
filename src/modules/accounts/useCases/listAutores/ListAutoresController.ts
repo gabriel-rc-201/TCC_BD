@@ -6,7 +6,7 @@ class ListAutoresController {
   async handle(req: Request, res: Response): Promise<Response> {
     const listAutoresUseCase = container.resolve(ListAutoresUseCase);
 
-    const all = listAutoresUseCase.execute();
+    const all = await listAutoresUseCase.execute();
 
     return res.json(all);
   }
