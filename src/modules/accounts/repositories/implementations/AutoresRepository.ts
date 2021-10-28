@@ -22,8 +22,8 @@ class AutoresRepository implements IAutoresRepository {
     await this.repository.save(user);
   }
 
-  async findByEmail(email: string): Promise<Autores> {
-    const autor = await this.repository.findOne({ email });
+  async findByMatricula(matricula: string): Promise<Autores> {
+    const autor = await this.repository.findOne({ matricula });
 
     return autor;
   }

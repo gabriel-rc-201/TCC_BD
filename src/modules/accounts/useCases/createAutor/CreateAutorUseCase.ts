@@ -19,9 +19,11 @@ class CreateAutorUseCase {
   ) {}
 
   async execute({ email, nome, senha, matricula }: IRequest): Promise<void> {
-    const autorExists = this.autoresRepository.findByEmail(email);
+    const autorExists = await this.autoresRepository.findByMatricula(matricula);
 
-    if (autorExists) throw new Error("Autor Already Exists!!!!");
+    if (autorExists) {
+      throw new Error("Autor Already Exists!!!!");
+    }
 
     const id =
       parseInt((await this.autoresRepository.findMaxId()).toString()) + 1;
