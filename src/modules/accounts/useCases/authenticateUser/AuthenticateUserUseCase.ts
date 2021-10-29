@@ -11,7 +11,7 @@ interface IRequest {
 }
 
 interface IResponse {
-  user: { name: string; email: string };
+  user: { name: string; email: string; matricula: string };
   token: string;
 }
 
@@ -35,22 +35,24 @@ class AuthenticateUserUseCase {
       user.push(await this.orientadoresRepository.findByMatricula(matricula));
     else user.push(await this.autoresRepository.findByMatricula(matricula));
 
-    if (!user[0]) throw new Error("Matricula or Password Incorrect!!!");
+    const usuario = user[0];
+    if (!usuario) throw new Error("Matricula or Password Incorrect!!!");
 
-    const passwordMatch = await compare(password, user[0].senha);
+    const passwordMatch = await compare(password, usuario.senha);
 
     if (!passwordMatch) throw new Error("Matricula or Password Incorrect!!!");
 
     const token = sign({}, "800db3ef1f77e2928e0e1877b8c6fc54", {
-      subject: user[0].id.toString(),
+      subject: usuario.id.toString(),
       expiresIn: "1d",
     });
 
     const tokenReturn: IResponse = {
       token,
       user: {
-        name: user[0].nome,
-        email: user[0].email,
+        name: usuario.nome,
+        email: usuario.email,
+        matricula: usuario.matricula,
       },
     };
 
