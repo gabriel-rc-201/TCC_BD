@@ -3,6 +3,7 @@ import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { IAutoresRepository } from "../../repositories/IAutoresRepository";
 import { IOrientadoresRepository } from "../../repositories/IOrientadoresRepository";
+import { AppError } from "../../../../errors/AppErros";
 
 interface IRequest {
   matricula: string;
@@ -36,11 +37,12 @@ class AuthenticateUserUseCase {
     else user.push(await this.autoresRepository.findByMatricula(matricula));
 
     const usuario = user[0];
-    if (!usuario) throw new Error("Matricula or Password Incorrect!!!");
+    if (!usuario) throw new AppError("Matricula or Password Incorrect!!!", 401);
 
     const passwordMatch = await compare(password, usuario.senha);
 
-    if (!passwordMatch) throw new Error("Matricula or Password Incorrect!!!");
+    if (!passwordMatch)
+      throw new AppError("Matricula or Password Incorrect!!!", 401);
 
     const token = sign({}, "800db3ef1f77e2928e0e1877b8c6fc54", {
       subject: usuario.id.toString(),

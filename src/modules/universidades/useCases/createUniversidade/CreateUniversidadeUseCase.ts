@@ -1,4 +1,5 @@
 import { inject, injectable } from "tsyringe";
+import { AppError } from "../../../../errors/AppErros";
 import { IUniversidadeRepository } from "../../repositories/IUniversidadesRepository";
 
 interface IRequest {
@@ -19,7 +20,7 @@ class CreateUniversidadeUseCase {
     );
 
     if (universidadeExists) {
-      throw new Error("Universidade ja está registrada");
+      throw new AppError("Universidade ja está registrada");
     }
 
     const id =

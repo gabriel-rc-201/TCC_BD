@@ -1,6 +1,7 @@
 import { inject, injectable } from "tsyringe";
 import { hash } from "bcrypt";
 import { IOrientadoresRepository } from "../../repositories/IOrientadoresRepository";
+import { AppError } from "../../../../errors/AppErros";
 
 interface IRequest {
   email: string;
@@ -27,7 +28,7 @@ class CreateOrientadorUseCase {
     );
 
     if (orientadorExists) {
-      throw new Error("Orientador Already Exists!!!!");
+      throw new AppError("Orientador Already Exists!!!!");
     }
 
     const id =

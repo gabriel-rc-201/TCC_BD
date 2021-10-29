@@ -1,4 +1,5 @@
 import { inject, injectable } from "tsyringe";
+import { AppError } from "../../../../errors/AppErros";
 import { IAreaEstudoRepository } from "../../repositories/IAreasEstudoRepository";
 
 interface IRequest {
@@ -18,7 +19,7 @@ class CreateAreaEstudoUseCase {
       await this.areasEstudodoRepository.findById(id);
 
     if (areasEstudoAlreadyExists) {
-      throw new Error("Area de Estudo ja está registrada");
+      throw new AppError("Area de Estudo ja está registrada");
     }
 
     this.areasEstudodoRepository.create({ id, nome });
