@@ -17,4 +17,4 @@ interface ICursoRepository {
   findMaxId(): Promise<number>;
 }
 
-export { ICursoRepository };
+export { ICursoRepository, ICursoDTO };
