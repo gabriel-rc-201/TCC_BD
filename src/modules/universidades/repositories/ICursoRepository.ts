@@ -13,7 +13,7 @@ interface ICursoRepository {
   create(curso: ICursoDTO): Promise<void>;
   listCursoCampus(campusid: Number): Promise<Curso[]>;
   listCursoUniversidade(universidadeid: Number): Promise<Curso[]>;
-  findByNome(): Promise<Curso>;
+  findByNome(nome: string): Promise<Curso[]>;
   findMaxId(): Promise<number>;
 }
 
