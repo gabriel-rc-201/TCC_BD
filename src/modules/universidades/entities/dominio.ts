@@ -2,7 +2,7 @@ import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
 import { Universidade } from "./universidades";
 
 @Entity()
-class Doninio {
+class Dominio {
   @Column()
   dominio: string;
 
@@ -11,4 +11,4 @@ class Doninio {
   universidadeid: Number;
 }
 
-export { Doninio };
+export { Dominio };
