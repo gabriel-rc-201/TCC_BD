@@ -21,7 +21,7 @@ class CampiRepository implements ICampiRepository {
 
   async create({ id, nome, universidadeid }: ICampusDTO): Promise<void> {
     const campus = this.repository.create({ id, nome, universidadeid });
-    this.repository.save(campus);
+    await this.repository.save(campus);
   }
 
   async findMaxId(): Promise<number> {
