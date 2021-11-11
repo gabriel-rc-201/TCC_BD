@@ -1,7 +1,7 @@
 import fs from "fs";
 import csvParse from "csv-parse";
 import { inject, injectable } from "tsyringe";
-import { IUniversidadeRepository } from "../../repositories/IUniversidadesRepository";
+import { IUniversidadeRepository } from "../../../repositories/IUniversidadesRepository";
 
 interface IImportUniversidade {
   nome: string;

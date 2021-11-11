@@ -1,6 +1,6 @@
 import { inject, injectable } from "tsyringe";
-import { Universidade } from "../../entities/universidades";
-import { IUniversidadeRepository } from "../../repositories/IUniversidadesRepository";
+import { Universidade } from "../../../entities/universidades";
+import { IUniversidadeRepository } from "../../../repositories/IUniversidadesRepository";
 
 @injectable()
 class ListUniversidadeUseCase {
