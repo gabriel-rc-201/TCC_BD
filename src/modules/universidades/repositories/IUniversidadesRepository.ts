@@ -8,6 +8,7 @@ interface IUniversidadeDTO {
 
 interface IUniversidadeRepository {
   findByCnpj(cnpj: string): Promise<Universidade>;
+  findById(id: number): Promise<Universidade>;
   list(): Promise<Universidade[]>;
   create({ id, nome, cnpj }: IUniversidadeDTO): Promise<void>;
   findMaxId(): Promise<number>;
