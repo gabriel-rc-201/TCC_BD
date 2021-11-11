@@ -26,7 +26,7 @@ class CreateUniversidadeUseCase {
     const id =
       parseInt((await this.universidadeRepository.findMaxId()).toString()) + 1;
 
-    this.universidadeRepository.create({ id, nome, cnpj });
+    await this.universidadeRepository.create({ id, nome, cnpj });
   }
 }
 
