@@ -9,6 +9,11 @@ class CampiRepository implements ICampiRepository {
     this.repository = getRepository(Campus);
   }
 
+  async findById(id: number): Promise<Campus> {
+    const campus = await this.repository.findOne({ id });
+    return campus;
+  }
+
   async listCampiUniversidade(universidadeid: Number): Promise<Campus[]> {
     const campi = await this.repository.find({ universidadeid });
     return campi;
