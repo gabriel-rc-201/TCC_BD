@@ -8,6 +8,12 @@ import { IAreaEstudoRepository } from "../../modules/areasEstudo/repositories/IA
 import { AreasEstudoRepository } from "../../modules/areasEstudo/repositories/implementations/AreasEstudoRepository";
 import { IUniversidadeRepository } from "../../modules/universidades/repositories/IUniversidadesRepository";
 import { UniversidadeRepository } from "../../modules/universidades/repositories/implementations/UniversidadesRepository";
+import { IDominioRepository } from "../../modules/universidades/repositories/IDominiosRepository";
+import { DominiosRepository } from "../../modules/universidades/repositories/implementations/DominiosRepository";
+import { ICursoRepository } from "../../modules/universidades/repositories/ICursoRepository";
+import { CursosRepository } from "../../modules/universidades/repositories/implementations/CursosRepository";
+import { ICampiRepository } from "../../modules/universidades/repositories/ICampiRepository";
+import { CampiRepository } from "../../modules/universidades/repositories/implementations/CampiRepository";
 
 container.registerSingleton<IAreaEstudoRepository>(
   "AreasEstudoRepository",
@@ -27,4 +33,19 @@ container.registerSingleton<IAutoresRepository>(
 container.registerSingleton<IOrientadoresRepository>(
   "OrientadoresRepository",
   OrientadoresRepository
+);
+
+container.registerSingleton<IDominioRepository>(
+  "DominiosRepository",
+  DominiosRepository
+);
+
+container.registerSingleton<ICursoRepository>(
+  "CursosRepository",
+  CursosRepository
+);
+
+container.registerSingleton<ICampiRepository>(
+  "CampiRepository",
+  CampiRepository
 );
