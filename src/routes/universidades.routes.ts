@@ -1,9 +1,9 @@
 import { Router } from "express";
 import multer from "multer";
 
-import { CreateUniversidadeController } from "../modules/universidades/useCases/createUniversidade/CreateUniversidadeController";
-import { ImportUniversidadeController } from "../modules/universidades/useCases/importUniversidade/ImportAreaEstudoController";
-import { ListUniversidadeController } from "../modules/universidades/useCases/listUniversidade/ListUniversidadeController";
+import { CreateUniversidadeController } from "../modules/universidades/useCases/universidadesUseCases/createUniversidade/CreateUniversidadeController";
+import { ImportUniversidadeController } from "../modules/universidades/useCases/universidadesUseCases/importUniversidade/ImportAreaEstudoController";
+import { ListUniversidadeController } from "../modules/universidades/useCases/universidadesUseCases/listUniversidade/ListUniversidadeController";
 
 const universidadesRoutes = Router();
 
