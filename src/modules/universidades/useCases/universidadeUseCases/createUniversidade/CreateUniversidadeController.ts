@@ -6,11 +6,11 @@ class CreateUniversidadeController {
   async handle(req: Request, res: Response): Promise<Response> {
     const { nome, cnpj } = req.body;
 
-    const createAreaEstudoUseCase = container.resolve(
+    const createUniversidadeUseCase = container.resolve(
       CreateUniversidadeUseCase
     );
 
-    await createAreaEstudoUseCase.execute({ nome, cnpj });
+    await createUniversidadeUseCase.execute({ nome, cnpj });
 
     return res.status(201).send();
   }
