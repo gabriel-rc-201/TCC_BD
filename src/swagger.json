@@ -16,6 +16,78 @@
     }
   ],
   "paths": {
+    "/universidades": {
+      "post": {
+        "tags": ["Universidade"],
+        "summary": "Cadastro de Instituições de Ensino Superior",
+        "description": "Essa rota é responsável por cadastrar as Instituições de Ensino Superior",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": { "type": "string" },
+                  "cnpj": { "type": "string" }
+                },
+                "example": {
+                  "dominio": "Universidade Federal do Ceará",
+                  "universidadeid": "07.272.636/0001-31"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" },
+          "400": { "description": "Category already exists" }
+        }
+      },
+      "get": {
+        "tags": ["Universidade"],
+        "summary": "Listagem de Instituições de Ensino",
+        "description": "Essa rota lista todos as Instituições de Ensino cadastradas no banco de dados",
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "dominio": { "type": "string" },
+                      "universidadeid": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/universidades/import": {
+      "post": {
+        "tags": ["Universidade"],
+        "summary": "Cadastro de Instituições de Ensino Superior atravez de Upload de arquivo",
+        "description": "Através dessa rota você pode cadastrar diversas universidades de uma vez com um arquivo CSV contendo o nome o cnpj da universidade RESPECTIVAMENTE",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": { "type": "object" },
+              "properties": {
+                "file": { "type": "string", "format": "binary" }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" }
+        }
+      }
+    },
     "/dominios": {
       "post": {
         "tags": ["Universidade"],
