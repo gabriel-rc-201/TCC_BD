@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { Universidade } from "./universidades";
 
-@Entity()
+@Entity("campus")
 class Campus {
   @PrimaryColumn()
   id: Number;
@@ -9,8 +9,7 @@ class Campus {
   @Column()
   nome: string;
 
-  @JoinColumn()
-  @ManyToOne(() => Universidade)
+  @Column()
   universidadeid: Number;
 }
 

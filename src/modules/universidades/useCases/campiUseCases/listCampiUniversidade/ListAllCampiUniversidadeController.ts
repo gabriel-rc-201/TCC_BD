@@ -10,7 +10,7 @@ class ListAllCampiUniversidadeController {
       ListAllCampiUniversidadeUseCase
     );
 
-    const all = listAllCampiUniversidadeUseCase.execute(universidadeid);
+    const all = await listAllCampiUniversidadeUseCase.execute(universidadeid);
 
     return res.json(all);
   }

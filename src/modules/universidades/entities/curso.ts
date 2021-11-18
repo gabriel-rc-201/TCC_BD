@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { Campus } from "./campus";
 
-@Entity()
+@Entity("curso")
 class Curso {
   @PrimaryColumn()
   id: Number;

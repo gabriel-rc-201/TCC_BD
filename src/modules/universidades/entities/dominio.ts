@@ -1,13 +1,14 @@
-import { Column, Entity, JoinColumn, ManyToOne } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
 import { Universidade } from "./universidades";
 
-@Entity()
+@Entity("dominio")
 class Dominio {
   @Column()
-  dominio: string;
+  doninio: string;
 
-  @JoinColumn()
-  @ManyToOne(() => Universidade)
+  @PrimaryColumn()
+  // @JoinColumn()
+  // @ManyToOne(() => Universidade)
   universidadeid: Number;
 }
 
