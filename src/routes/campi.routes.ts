@@ -9,7 +9,7 @@ const listCampiUniversidadeController =
   new ListAllCampiUniversidadeController();
 const createCampusController = new CreateCampusController();
 
-campiRoutes.get("/", listCampiUniversidadeController.handle);
+campiRoutes.post("/list", listCampiUniversidadeController.handle);
 
 campiRoutes.post("/", createCampusController.handle);
 
