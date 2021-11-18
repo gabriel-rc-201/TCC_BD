@@ -1,0 +1,139 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API do TCC databank",
+    "description": "Essa API tem como objetivo a manipulação de dados que acontece por trás do projeto TCC DB",
+    "termsOfService": "http://localhost:3000/terms",
+    "contact": {
+      "email": "ganriel201@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3333/",
+      "description": "API de testes"
+    }
+  ],
+  "paths": {
+    "/dominios": {
+      "post": {
+        "tags": ["Universidade"],
+        "summary": "Cadastro de dominios",
+        "description": "Essa rota é responsável por cadastrar os dominios das universidades",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "dominio": { "type": "string" },
+                  "universidadeid": { "type": "number" }
+                },
+                "example": {
+                  "dominio": "ufc.br",
+                  "universidadeid": 1
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" },
+          "500": { "description": "Category already exists" }
+        }
+      },
+      "get": {
+        "tags": ["Universidade"],
+        "summary": "Listagem de dominios",
+        "description": "Essa rota lista todos os dominios cadastrados no banco de dados",
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "description": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/campus": {
+      "post": {
+        "tags": ["Universidade"],
+        "summary": "Cadastro de campi",
+        "description": "Essa rota é responsável por cadastrar os campi das universidades",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": { "type": "string" },
+                  "universidadeid": { "type": "number" }
+                },
+                "example": {
+                  "nome": "UFC Campus de Sobral",
+                  "universidadeid": 1
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" },
+          "500": { "description": "Category already exists" }
+        }
+      },
+      "get": {
+        "tags": ["Universidade"],
+        "summary": "Listagem de campi",
+        "description": "Essa rota lista todos os campi de uma universiade cadastrados no banco de dados",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "universidadeid": { "type": "number" }
+                },
+                "example": {
+                  "universidadeid": 1
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": { "type": "string" },
+                      "description": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
