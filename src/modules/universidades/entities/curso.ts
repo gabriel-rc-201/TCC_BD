@@ -15,12 +15,10 @@ class Curso {
   @Column()
   modalidade: string;
 
-  @JoinColumn()
-  @ManyToOne(() => Campus)
+  @Column()
   campusid: Number;
 
-  @JoinColumn()
-  @ManyToOne(() => Campus)
+  @Column()
   universidadeid: Number;
 }
 
