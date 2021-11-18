@@ -10,7 +10,7 @@ class ListCursoByCampusController {
       ListCursoByCampusUseCase
     );
 
-    const all = listCursoByCampusUseCase.execute(campusid);
+    const all = await listCursoByCampusUseCase.execute(campusid);
 
     return res.json(all);
   }
