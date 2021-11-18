@@ -137,6 +137,85 @@
           }
         }
       }
+    },
+    "/cursos": {
+      "post": {
+        "tags": ["Universidade"],
+        "summary": "Cadastro de cursos de uma universidade",
+        "description": "Essa rota é responsável por cadastrar os cursos das universidades, as propriedades turno e modalidade só aceitam tipos específicos. \n Para o turno: \"diurno\", \"noturno\" e \"integral\". \n Para modalidade: \"licenciatura\", \"bacharelado\" e  \"bacharelado e licenciatura\" ",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": { "type": "string" },
+                  "campusid": { "type": "number" },
+                  "universidadeid": { "type": "number" },
+                  "turno": { "type": "string" },
+                  "modalidade": { "type": "string" }
+                },
+                "example": {
+                  "nome": "Engenharia de Computação",
+                  "campusid": 1,
+                  "universidadeid": 1,
+                  "turno": "integral",
+                  "modalidade": "bacharelado"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" },
+          "500": { "description": "Category already exists" }
+        }
+      }
+    },
+    "/cursos/list/campus": {
+      "post": {
+        "tags": ["Universidade"],
+        "summary": "Listagem de cursos de um campus de uma universidade",
+        "description": "Essa rota é responsável por listar todos os cursos de um capmus de uma universidade.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "campusid": { "type": "number" }
+                },
+                "example": {
+                  "campusid": 1
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": { "type": "number" },
+                      "nome": { "type": "string" },
+                      "turno": { "type": "string" },
+                      "modalidade": { "type": "string" },
+                      "campusid": { "type": "number" },
+                      "universidadeid": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
