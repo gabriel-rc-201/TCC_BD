@@ -360,6 +360,118 @@
           "201": { "description": "Created" }
         }
       }
+    },
+    "/autores": {
+      "post": {
+        "tags": ["Autores Orientandos"],
+        "summary": "Cadastro de Autores Orientandos",
+        "description": "Essa rota é responsável por cadastrar os Autores Orientandos, ATENÇÃO: o email tem que ser um email instucional registrado no banco de dados",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string" },
+                  "nome": { "type": "string" },
+                  "senha": { "type": "string" },
+                  "matricula": { "type": "string" }
+                },
+                "example": {
+                  "email": "exemple@alu.ufc.br",
+                  "nome": "Alguem",
+                  "senha": "senha de exemplo",
+                  "matricula": "123456"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" },
+          "400": { "description": "Category already exists" }
+        }
+      },
+      "get": {
+        "tags": ["Autores Orientandos"],
+        "summary": "Listagem de Autores Orientandos",
+        "description": "Essa rota lista todos os Autores Orientandos cadastradas no banco de dados",
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "dominio": { "type": "string" },
+                      "universidadeid": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orientadores": {
+      "post": {
+        "tags": ["Autores Orientadores"],
+        "summary": "Cadastro de Autores Orientadores",
+        "description": "Essa rota é responsável por cadastrar os Autores Orientadores, ATENÇÃO: o email tem que ser um email instucional registrado no banco de dados",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": { "type": "string" },
+                  "nome": { "type": "string" },
+                  "senha": { "type": "string" },
+                  "matricula_siape": { "type": "string" }
+                },
+                "example": {
+                  "email": "exemple@alu.ufc.br",
+                  "nome": "Alguem",
+                  "senha": "senha de exemplo",
+                  "matricula": "123456"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" },
+          "400": { "description": "Category already exists" }
+        }
+      },
+      "get": {
+        "tags": ["Autores Orientadores"],
+        "summary": "Listagem de Autores Orientadores",
+        "description": "Essa rota lista todos os Autores Orientadores cadastradas no banco de dados",
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "dominio": { "type": "string" },
+                      "universidadeid": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
