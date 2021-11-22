@@ -83,11 +83,10 @@ ALTER TABLE dominio ADD CONSTRAINT dominio_PK PRIMARY KEY (id);
 
 CREATE TABLE nomeCitaBiblio
   (
-    id      UUID NOT NULL
     autorId INTEGER NOT NULL ,
     nome    VARCHAR NOT NULL
   ) ;
-ALTER TABLE nomeCitaBiblio ADD CONSTRAINT nomeCitaBiblio_PK PRIMARY KEY ( id ) ;
+ALTER TABLE nomeCitaBiblio ADD CONSTRAINT nomeCitaBiblio_PK PRIMARY KEY ( nome ) ;
 
 
 CREATE TABLE orientacao

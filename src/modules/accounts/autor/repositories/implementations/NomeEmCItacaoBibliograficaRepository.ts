@@ -14,10 +14,16 @@ class NomeEmCitacaoBibliograficaRepository
     this.repository = getRepository(NomeEmCitacaoBibliografica);
   }
 
+  findByNome(nome: string): Promise<NomeEmCitacaoBibliografica> {
+    const nome_ = this.repository.findOne(nome);
+    return nome_;
+  }
+
   async create({ nome, autorid }: INomeCitaBiblioRepositoryDTO): Promise<void> {
     const nome_ = this.repository.create({ nome, autorid });
     await this.repository.save(nome_);
   }
+
   async findByAutorid(autorid: number): Promise<NomeEmCitacaoBibliografica[]> {
     const nomes = await this.repository.find({ autorid });
     return nomes;

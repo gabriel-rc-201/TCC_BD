@@ -1,9 +1,9 @@
 import { container } from "tsyringe";
 
-import { IAutoresRepository } from "../../modules/accounts/repositories/IAutoresRepository";
-import { AutoresRepository } from "../../modules/accounts/repositories/implementations/AutoresRepository";
-import { IOrientadoresRepository } from "../../modules/accounts/repositories/IOrientadoresRepository";
-import { OrientadoresRepository } from "../../modules/accounts/repositories/implementations/OrientadoresRepository";
+import { IAutoresRepository } from "../../modules/accounts/autor/repositories/IAutoresRepository";
+import { AutoresRepository } from "../../modules/accounts/autor/repositories/implementations/AutoresRepository";
+import { IOrientadoresRepository } from "../../modules/accounts/orientador/repositories/IOrientadoresRepository";
+import { OrientadoresRepository } from "../../modules/accounts/orientador/repositories/implementations/OrientadoresRepository";
 import { IAreaEstudoRepository } from "../../modules/areasEstudo/repositories/IAreasEstudoRepository";
 import { AreasEstudoRepository } from "../../modules/areasEstudo/repositories/implementations/AreasEstudoRepository";
 import { IUniversidadeRepository } from "../../modules/universidades/repositories/IUniversidadesRepository";
@@ -14,6 +14,8 @@ import { ICursoRepository } from "../../modules/universidades/repositories/ICurs
 import { CursosRepository } from "../../modules/universidades/repositories/implementations/CursosRepository";
 import { ICampiRepository } from "../../modules/universidades/repositories/ICampiRepository";
 import { CampiRepository } from "../../modules/universidades/repositories/implementations/CampiRepository";
+import { INomeEmCitacaoBibliograficaRepository } from "../../modules/accounts/autor/repositories/INomeEmCitacaoBibliograficaRepository";
+import { NomeEmCitacaoBibliograficaRepository } from "../../modules/accounts/autor/repositories/implementations/NomeEmCItacaoBibliograficaRepository";
 
 container.registerSingleton<IAreaEstudoRepository>(
   "AreasEstudoRepository",
@@ -48,4 +50,9 @@ container.registerSingleton<ICursoRepository>(
 container.registerSingleton<ICampiRepository>(
   "CampiRepository",
   CampiRepository
+);
+
+container.registerSingleton<INomeEmCitacaoBibliograficaRepository>(
+  "NomeEmCitacaoBibliografica",
+  NomeEmCitacaoBibliograficaRepository
 );

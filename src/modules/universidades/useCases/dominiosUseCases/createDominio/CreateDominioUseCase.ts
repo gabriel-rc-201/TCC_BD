@@ -29,7 +29,7 @@ class CreateDominioUseCase {
 
     if (dominioExists) throw new AppError("domino ja está registrado!!!");
 
-    this.dominioRepository.create({ dominio, universidadeid });
+    await this.dominioRepository.create({ dominio, universidadeid });
   }
 }
 
