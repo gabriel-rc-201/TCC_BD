@@ -18,6 +18,8 @@ import { INomeEmCitacaoBibliograficaRepository } from "../../modules/accounts/au
 import { NomeEmCitacaoBibliograficaRepository } from "../../modules/accounts/autor/repositories/implementations/NomeEmCItacaoBibliograficaRepository";
 import { ITrabalhoAcademicoRepository } from "../../modules/trabalhoAcademico/repositories/ITrabalhoAcademicoRepository";
 import { TrabalhosAcademicosRepository } from "../../modules/trabalhoAcademico/repositories/implementations/TrabalhoAcademicoRepository";
+import { ITrabalhoAutorOrientadorRepository } from "../../modules/trabalhoAutorOrientador/repositories/ITrabalhoAutorOrientadorRepository";
+import { TrabalhoAutorOrientadorRepository } from "../../modules/trabalhoAutorOrientador/repositories/implementations/TrabalhoAutorOrientadorRepository";
 
 container.registerSingleton<IAreaEstudoRepository>(
   "AreasEstudoRepository",
@@ -62,4 +64,9 @@ container.registerSingleton<INomeEmCitacaoBibliograficaRepository>(
 container.registerSingleton<ITrabalhoAcademicoRepository>(
   "TrabalhoAcademico",
   TrabalhosAcademicosRepository
+);
+
+container.registerSingleton<ITrabalhoAutorOrientadorRepository>(
+  "RelacaoTrabalhoAutorOrientador",
+  TrabalhoAutorOrientadorRepository
 );
