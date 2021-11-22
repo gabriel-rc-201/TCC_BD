@@ -31,8 +31,8 @@
                   "cnpj": { "type": "string" }
                 },
                 "example": {
-                  "dominio": "Universidade Federal do Ceará",
-                  "universidadeid": "07.272.636/0001-31"
+                  "nome": "Universidade Teste",
+                  "cnpj": "Teste CNPJ"
                 }
               }
             }
