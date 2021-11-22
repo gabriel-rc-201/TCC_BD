@@ -15,6 +15,7 @@ interface ITrabalhoAcademicoRepository {
   listAll(): Promise<TrabalhosAcademicos[]>;
   listByArea(areaestudoid: string): Promise<TrabalhosAcademicos[]>;
   findByTitulo(titulo: string): Promise<TrabalhosAcademicos>;
+  findById(id: number): Promise<TrabalhosAcademicos>;
   findMaxId(): Promise<number>;
 }
 

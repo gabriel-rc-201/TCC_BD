@@ -10,6 +10,11 @@ class TrabalhosAcademicosRepository implements ITrabalhoAcademicoRepository {
     this.repository = getRepository(TrabalhosAcademicos);
   }
 
+  async findById(id: number): Promise<TrabalhosAcademicos> {
+    const trabalho = await this.repository.findOne(id);
+    return trabalho;
+  }
+
   async findByTitulo(titulo: string): Promise<TrabalhosAcademicos> {
     const trabalho = await this.repository.findOne(titulo);
     return trabalho;
