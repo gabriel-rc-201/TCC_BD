@@ -11,6 +11,11 @@ class TrabalhoAutorOrientadorRepository
     this.repository = getRepository(TrabalhoAutorOrientado);
   }
 
+  async find(trabalhoid: number): Promise<TrabalhoAutorOrientado> {
+    const relacao = await this.repository.findOne(trabalhoid);
+    return relacao;
+  }
+
   async create(
     autorid: number,
     orientadorid: number,
