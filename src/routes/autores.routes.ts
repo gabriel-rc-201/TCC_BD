@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { CreateAutorController } from "../modules/accounts/useCases/createAutor/CreateAutorController";
-import { ListAutoresController } from "../modules/accounts/useCases/listAutores/ListAutoresController";
+import { CreateAutorController } from "../modules/accounts/autor/useCases/createAutor/CreateAutorController";
+import { ListAutoresController } from "../modules/accounts/autor/useCases/listAutores/ListAutoresController";
 
 const autoresRoutes = Router();
 

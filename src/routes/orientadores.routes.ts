@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { CreateOrientadorController } from "../modules/accounts/useCases/createOrientador/CreateOrientadorController";
-import { ListOrientadoresController } from "../modules/accounts/useCases/listOrientadores/ListOrientadoresController";
+import { CreateOrientadorController } from "../modules/accounts/orientador/useCases/createOrientador/CreateOrientadorController";
+import { ListOrientadoresController } from "../modules/accounts/orientador/useCases/listOrientadores/ListOrientadoresController";
 
 const orientadoresRoutes = Router();
 

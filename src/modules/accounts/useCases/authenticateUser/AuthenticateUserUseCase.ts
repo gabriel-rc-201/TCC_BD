@@ -1,9 +1,9 @@
 import { inject, injectable } from "tsyringe";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
-import { IAutoresRepository } from "../../repositories/IAutoresRepository";
-import { IOrientadoresRepository } from "../../repositories/IOrientadoresRepository";
 import { AppError } from "../../../../errors/AppErros";
+import { IAutoresRepository } from "../../autor/repositories/IAutoresRepository";
+import { IOrientadoresRepository } from "../../orientador/repositories/IOrientadoresRepository";
 
 interface IRequest {
   matricula: string;
