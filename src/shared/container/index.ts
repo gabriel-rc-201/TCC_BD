@@ -16,6 +16,8 @@ import { ICampiRepository } from "../../modules/universidades/repositories/ICamp
 import { CampiRepository } from "../../modules/universidades/repositories/implementations/CampiRepository";
 import { INomeEmCitacaoBibliograficaRepository } from "../../modules/accounts/autor/repositories/INomeEmCitacaoBibliograficaRepository";
 import { NomeEmCitacaoBibliograficaRepository } from "../../modules/accounts/autor/repositories/implementations/NomeEmCItacaoBibliograficaRepository";
+import { ITrabalhoAcademicoRepository } from "../../modules/trabalhoAcademico/repositories/ITrabalhoAcademicoRepository";
+import { TrabalhosAcademicosRepository } from "../../modules/trabalhoAcademico/repositories/implementations/TrabalhoAcademicoRepository";
 
 container.registerSingleton<IAreaEstudoRepository>(
   "AreasEstudoRepository",
@@ -55,4 +57,9 @@ container.registerSingleton<ICampiRepository>(
 container.registerSingleton<INomeEmCitacaoBibliograficaRepository>(
   "NomeEmCitacaoBibliografica",
   NomeEmCitacaoBibliograficaRepository
+);
+
+container.registerSingleton<ITrabalhoAcademicoRepository>(
+  "TrabalhoAcademico",
+  TrabalhosAcademicosRepository
 );
