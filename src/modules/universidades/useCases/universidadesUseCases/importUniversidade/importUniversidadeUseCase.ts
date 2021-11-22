@@ -49,11 +49,11 @@ class ImportUniversidadeUseCase {
     universidades.map(async (universidade) => {
       const { nome, cnpj } = universidade;
 
-      const existAreaEstudo = await this.universidadeRepository.findByCnpj(
+      const universidadeExists = await this.universidadeRepository.findByCnpj(
         cnpj
       );
 
-      if (!existAreaEstudo) {
+      if (!universidadeExists) {
         id++;
 
         await this.universidadeRepository.create({ id, nome, cnpj });
