@@ -28,6 +28,7 @@ class TrabalhosAcademicosRepository implements ITrabalhoAcademicoRepository {
     localdoarquivo,
     localdepublicacao,
     areaestudoid,
+    data,
   }: ITrabalhoAcademicoDTO): Promise<void> {
     const trabalho = this.repository.create({
       id,
@@ -36,7 +37,7 @@ class TrabalhosAcademicosRepository implements ITrabalhoAcademicoRepository {
       nivel,
       localdoarquivo,
       localdepublicacao,
-      data: Date.now(),
+      data,
       areaestudoid,
     });
 
