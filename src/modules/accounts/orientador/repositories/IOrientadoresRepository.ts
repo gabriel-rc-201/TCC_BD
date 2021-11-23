@@ -4,8 +4,7 @@ import { Orientadores } from "../entities/orientadores";
 interface IOrientadoresRepository {
   create(data: IOrientadoresDTO): Promise<void>;
   findByMatricula(matricula_siape: string): Promise<Orientadores>;
-  findById(id: number): Promise<Orientadores>;
-  findMaxId(): Promise<number>;
+  findById(id: string): Promise<Orientadores>;
   list(): Promise<Orientadores[]>;
 }
 

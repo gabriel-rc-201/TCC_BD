@@ -31,13 +31,9 @@ class CreateOrientadorUseCase {
       throw new AppError("Orientador Already Exists!!!!");
     }
 
-    const id =
-      parseInt((await this.orientadoresRepository.findMaxId()).toString()) + 1;
-
     const senhaHash = await hash(senha, 8);
 
     await this.orientadoresRepository.create({
-      id,
       email,
       nome,
       senha: senhaHash,

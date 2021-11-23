@@ -1,9 +1,10 @@
 import { Column, Entity, PrimaryColumn } from "typeorm";
+import { v4 as uuid } from "uuid";
 
 @Entity("orientador")
 class Orientadores {
   @PrimaryColumn()
-  id: Number;
+  id?: string;
 
   @Column()
   nome: string;
@@ -16,6 +17,10 @@ class Orientadores {
 
   @Column()
   matricula_siape: string;
+
+  constructor() {
+    if (!this.id) this.id = uuid();
+  }
 }
 
 export { Orientadores };

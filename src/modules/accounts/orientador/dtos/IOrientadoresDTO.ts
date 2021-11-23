@@ -1,5 +1,5 @@
 interface IOrientadoresDTO {
-  id: number;
+  id?: string;
   nome: string;
   matricula_siape: string;
   email: string;

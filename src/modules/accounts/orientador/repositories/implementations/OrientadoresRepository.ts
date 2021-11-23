@@ -10,7 +10,7 @@ class OrientadoresRepository implements IOrientadoresRepository {
     this.repository = getRepository(Orientadores);
   }
 
-  findById(id: number): Promise<Orientadores> {
+  findById(id: string): Promise<Orientadores> {
     const orientador = this.repository.findOne(id);
     return orientador;
   }
@@ -45,23 +45,6 @@ class OrientadoresRepository implements IOrientadoresRepository {
     const orientador = await this.repository.findOne({ matricula_siape });
 
     return orientador;
-  }
-
-  async findMaxId(): Promise<number> {
-    const ids = await this.repository.find({
-      select: ["id"],
-      order: { id: "DESC" },
-      take: 1,
-    });
-
-    if (ids.length === 0) return 0;
-
-    const idNumber = ids[0].id;
-
-    let idString = idNumber.toString();
-    let id = parseInt(idString);
-
-    return id;
   }
 }
 
