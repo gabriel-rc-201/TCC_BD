@@ -2,23 +2,23 @@ import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 
 @Entity("cursa")
 class RelacaoAutorCurso {
-  @Column()
-  autor_id: number;
+  @PrimaryColumn()
+  autor_id: string;
 
-  @Column()
-  cursoid: number;
+  @PrimaryColumn()
+  curso_id: string;
 
-  @Column()
-  campus_id: number;
+  @PrimaryColumn()
+  campus_id: string;
 
-  @Column()
-  universidade_id: number;
+  @PrimaryColumn()
+  universidade_id: string;
 
   @CreateDateColumn()
-  datainicio: Date;
+  data_inicio: Date;
 
   @Column()
-  datafim: Date;
+  data_fim: Date;
 }
 
 export { RelacaoAutorCurso };
