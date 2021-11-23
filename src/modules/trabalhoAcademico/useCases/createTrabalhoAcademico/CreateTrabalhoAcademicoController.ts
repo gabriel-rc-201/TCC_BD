@@ -23,7 +23,7 @@ class CreateTrabalhoAcademicoController {
       localdoarquivo,
       localdepublicacao,
       areaestudoid,
-      autorid,
+      autor_id,
       orientadorid,
     } = req.body;
 
@@ -58,9 +58,9 @@ class CreateTrabalhoAcademicoController {
     );
 
     try {
-      console.log({ autorid: autorid });
+      console.log({ autor_id: autor_id });
       await createRealacaoTrabalhoAutorOrientador.execute(
-        autorid,
+        autor_id,
         trabalho.id,
         orientadorid
       );

@@ -40,23 +40,6 @@ class AutoresRepository implements IAutoresRepository {
 
     return autor;
   }
-
-  async findMaxId(): Promise<number> {
-    const ids = await this.repository.find({
-      select: ["id"],
-      order: { id: "DESC" },
-      take: 1,
-    });
-
-    if (ids.length === 0) return 0;
-
-    const idNumber = ids[0].id;
-
-    let idString = idNumber.toString();
-    let id = parseInt(idString);
-
-    return id;
-  }
 }
 
 export { AutoresRepository };

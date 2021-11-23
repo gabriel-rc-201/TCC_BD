@@ -3,18 +3,17 @@ import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 @Entity("cursa")
 class RelacaoAutorCurso {
   @Column()
-  autorid: number;
+  autor_id: number;
 
   @Column()
   cursoid: number;
 
   @Column()
-  campusid: number;
+  campus_id: number;
 
   @Column()
-  universidadeid: number;
+  universidade_id: number;
 
-  @PrimaryColumn()
   @CreateDateColumn()
   datainicio: Date;
 

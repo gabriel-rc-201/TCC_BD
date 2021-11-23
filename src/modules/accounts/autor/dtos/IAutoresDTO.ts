@@ -1,5 +1,5 @@
 interface IAutoresDTO {
-  id: number;
+  id?: string;
   nome: string;
   matricula: string;
   email: string;

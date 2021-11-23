@@ -17,12 +17,12 @@ class TrabalhoAutorOrientadorRepository
   }
 
   async create(
-    autorid: number,
+    autor_id: number,
     orientadorid: number,
     trabalhoacademicoid: number
   ): Promise<void> {
     const relacao = this.repository.create({
-      autorid,
+      autor_id,
       orientadorid,
       trabalhoacademicoid,
     });

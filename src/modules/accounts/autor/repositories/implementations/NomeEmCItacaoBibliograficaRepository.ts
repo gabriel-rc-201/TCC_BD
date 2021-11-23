@@ -19,13 +19,16 @@ class NomeEmCitacaoBibliograficaRepository
     return nome_;
   }
 
-  async create({ nome, autorid }: INomeCitaBiblioRepositoryDTO): Promise<void> {
-    const nome_ = this.repository.create({ nome, autorid });
+  async create({
+    nome,
+    autor_id,
+  }: INomeCitaBiblioRepositoryDTO): Promise<void> {
+    const nome_ = this.repository.create({ nome, autor_id });
     await this.repository.save(nome_);
   }
 
-  async findByAutorid(autorid: number): Promise<NomeEmCitacaoBibliografica[]> {
-    const nomes = await this.repository.find({ autorid });
+  async findByAutorid(autor_id: string): Promise<NomeEmCitacaoBibliografica[]> {
+    const nomes = await this.repository.find({ autor_id });
     return nomes;
   }
 }

@@ -2,12 +2,12 @@ import { NomeEmCitacaoBibliografica } from "../entities/nomecitabiblio";
 
 interface INomeCitaBiblioRepositoryDTO {
   nome: string;
-  autorid: number;
+  autor_id: string;
 }
 
 interface INomeEmCitacaoBibliograficaRepository {
-  create({ nome, autorid }: INomeCitaBiblioRepositoryDTO): Promise<void>;
-  findByAutorid(autorid: number): Promise<NomeEmCitacaoBibliografica[]>;
+  create({ nome, autor_id }: INomeCitaBiblioRepositoryDTO): Promise<void>;
+  findByAutorid(autor_id: string): Promise<NomeEmCitacaoBibliografica[]>;
   findByNome(nome: string): Promise<NomeEmCitacaoBibliografica>;
 }
 

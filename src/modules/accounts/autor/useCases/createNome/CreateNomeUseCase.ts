@@ -13,8 +13,8 @@ class CreateNomeUseCase {
     private autorRepository: IAutoresRepository
   ) {}
 
-  async execute(nome: string, autorid: number) {
-    const autorExists = await this.autorRepository.findById(autorid);
+  async execute(nome: string, autor_id: string) {
+    const autorExists = await this.autorRepository.findById(autor_id);
 
     if (!autorExists)
       throw new AppError(
@@ -25,7 +25,7 @@ class CreateNomeUseCase {
 
     if (nomeExist) throw new AppError("esse nome já está registrado");
 
-    await this.nomeRepository.create({ nome, autorid });
+    await this.nomeRepository.create({ nome, autor_id });
   }
 }
 

@@ -22,7 +22,7 @@ class CreateRealacaoTrabalhoAutorOrientador {
   ) {}
 
   async execute(
-    autorid: number,
+    autor_id: number,
     trabalhoacademicoid: number,
     orientadorid: number
   ): Promise<void> {
@@ -34,7 +34,7 @@ class CreateRealacaoTrabalhoAutorOrientador {
         "Falha ao registrar o trabalho acadêmico na relação, trabalho não encontrado"
       );
 
-    const autorExists = await this.autorRepository.findById(autorid);
+    const autorExists = await this.autorRepository.findById(autor_id);
     if (!autorExists)
       throw new AppError(
         "Falha ao registrar o autor acadêmico na relação, autor não encontrado"
@@ -53,7 +53,7 @@ class CreateRealacaoTrabalhoAutorOrientador {
     );
     if (relacaoExists) {
       if (
-        relacaoExists.autorid === autorid &&
+        relacaoExists.autor_id === autor_id &&
         relacaoExists.orientadorid === orientadorid &&
         relacaoExists.trabalhoacademicoid === trabalhoacademicoid
       ) {
@@ -62,7 +62,7 @@ class CreateRealacaoTrabalhoAutorOrientador {
     }
 
     await this.relacaoRepository.create(
-      autorid,
+      autor_id,
       orientadorid,
       trabalhoacademicoid
     );

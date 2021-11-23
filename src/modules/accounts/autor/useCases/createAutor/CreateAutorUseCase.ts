@@ -25,13 +25,9 @@ class CreateAutorUseCase {
       throw new AppError("Autor Already Exists!!!!");
     }
 
-    const id =
-      parseInt((await this.autoresRepository.findMaxId()).toString()) + 1;
-
     const senhaHash = await hash(senha, 8);
 
     await this.autoresRepository.create({
-      id,
       email,
       nome,
       senha: senhaHash,

@@ -9,8 +9,8 @@ class ListAllNomesByAutorUseCase {
     private repository: INomeEmCitacaoBibliograficaRepository
   ) {}
 
-  async execute(autorid: number): Promise<NomeEmCitacaoBibliografica[]> {
-    const nomes = await this.repository.findByAutorid(autorid);
+  async execute(autor_id: string): Promise<NomeEmCitacaoBibliografica[]> {
+    const nomes = await this.repository.findByAutorid(autor_id);
     return nomes;
   }
 }

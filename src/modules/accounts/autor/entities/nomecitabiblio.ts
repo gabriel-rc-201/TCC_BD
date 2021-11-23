@@ -1,5 +1,4 @@
 import { Column, Entity, PrimaryColumn } from "typeorm";
-import { v4 as uuid } from "uuid";
 
 @Entity("nomecitabiblio")
 class NomeEmCitacaoBibliografica {
@@ -7,7 +6,7 @@ class NomeEmCitacaoBibliografica {
   nome: string;
 
   @Column()
-  autorid: number;
+  autor_id: string;
 }
 
 export { NomeEmCitacaoBibliografica };
