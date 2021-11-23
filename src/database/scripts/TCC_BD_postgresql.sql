@@ -1,24 +1,24 @@
 -- Autor: Gabriel Ribeiro Camelo
 
--- CREATE SCHEMA tcc_bd;
+-- CREATE schema tcc_bd;
 
--- SET search_path TO tcc_bd;
+-- set search_path to tcc_bd;
 
 -- GRANT ALL ON SCHEMA tcc_bd TO postgres;
 -- GRANT ALL ON SCHEMA tcc_bd TO tcc_bd;
 
 
-CREATE TABLE areaEstudo
+CREATE TABLE area_estudo
   (
     id   VARCHAR NOT NULL ,
     nome VARCHAR NOT NULL
   ) ;
-ALTER TABLE areaEstudo ADD CONSTRAINT AreaEstudo_PK PRIMARY KEY ( id ) ;
+ALTER TABLE area_estudo ADD CONSTRAINT AreaEstudo_PK PRIMARY KEY ( id ) ;
 
 
 CREATE TABLE autor
   (
-    id        INTEGER NOT NULL ,
+    id        UUID NOT NULL ,
     nome      VARCHAR NOT NULL ,
     matricula VARCHAR NOT NULL ,
     senha     VARCHAR NOT NULL ,
@@ -29,134 +29,132 @@ ALTER TABLE autor ADD CONSTRAINT Autor_PK PRIMARY KEY ( id ) ;
 
 CREATE TABLE campus
   (
-    id             INTEGER NOT NULL ,
-    nome           VARCHAR NOT NULL ,
-    universidadeId INTEGER NOT NULL
+    id              UUID NOT NULL ,
+    nome            VARCHAR NOT NULL ,
+    universidade_id UUID NOT NULL
   ) ;
-ALTER TABLE campus ADD CONSTRAINT Campus_PK PRIMARY KEY ( id, universidadeId ) ;
+ALTER TABLE campus ADD CONSTRAINT Campus_PK PRIMARY KEY ( id, universidade_id ) ;
 
 
 CREATE TABLE cria
   (
-    autorId             INTEGER NOT NULL ,
-    trabalhoAcademicoId INTEGER NOT NULL ,
-    orientadorId        INTEGER NOT NULL
+    autor_id              UUID NOT NULL ,
+    trabalho_academico_id UUID NOT NULL ,
+    orientador_id         UUID NOT NULL
   ) ;
-ALTER TABLE cria ADD CONSTRAINT Cria_PK PRIMARY KEY ( autorId, trabalhoAcademicoId, orientadorId ) ;
+ALTER TABLE cria ADD CONSTRAINT Cria_PK PRIMARY KEY ( autor_id, trabalho_academico_id, orientador_id ) ;
 
 
 CREATE TABLE cursa
   (
-    autorId        INTEGER NOT NULL ,
-    cursoId        INTEGER NOT NULL ,
-    campusId       INTEGER NOT NULL ,
-    universidadeId INTEGER NOT NULL ,
-    dataInicio     DATE NOT NULL ,
-    dataFim        DATE
+    autor_id         UUID NOT NULL ,
+    curso_id         UUID NOT NULL ,
+    campus_id        UUID NOT NULL ,
+    universidade_id  UUID NOT NULL ,
+    data_inicio      DATE NOT NULL ,
+    data_fim         DATE
   ) ;
-ALTER TABLE cursa ADD CONSTRAINT cursa_PK PRIMARY KEY ( autorId, cursoId, campusId, universidadeId ) ;
+ALTER TABLE cursa ADD CONSTRAINT cursa_PK PRIMARY KEY ( autor_id, curso_id, campus_id, universidade_id ) ;
 
-CREATE TYPE turno AS ENUM ('diurno', 'noturno', 'integral');
+create type turno as ENUM ('diurno', 'noturno', 'integral');
 
-CREATE TYPE modalidade AS ENUM ('licenciatura', 'bacharelado', 'bacharelado e licenciatura');
+create type modalidade as ENUM ('licenciatura', 'bacharelado', 'bacharelado e licenciatura');
 
 CREATE TABLE curso
   (
-    id             INTEGER NOT NULL ,
-    nome           VARCHAR NOT NULL ,
-    campusId       INTEGER NOT NULL ,
-    universidadeId INTEGER NOT NULL ,
-    turno          turno,
-    modalidade     modalidade
+    id              UUID NOT NULL ,
+    nome            VARCHAR NOT NULL ,
+    campus_id       UUID NOT NULL ,
+    universidade_id UUID NOT NULL ,
+    turno           turno,
+    modalidade      modalidade
   ) ;
-ALTER TABLE curso ADD CONSTRAINT Curso_PK PRIMARY KEY ( id, campusId, universidadeId );
+ALTER TABLE curso ADD CONSTRAINT Curso_PK PRIMARY KEY ( id, campus_id, universidade_id );
 
 
 CREATE TABLE dominio
   (
-    id             UUID NOT NULL,
-    doninio        VARCHAR NOT NULL ,
-    universidadeId INTEGER NOT NULL
+    dominio         VARCHAR NOT NULL ,
+    universidade_id UUID NOT NULL
   ) ;
-ALTER TABLE dominio ADD CONSTRAINT dominio_PK PRIMARY KEY (id);
+ALTER TABLE dominio ADD CONSTRAINT Dominio_PK PRIMARY KEY (dominio, universidade_id);
 
-
-CREATE TABLE nomeCitaBiblio
+CREATE TABLE nome_cita_biblio
   (
-    autorId INTEGER NOT NULL ,
-    nome    VARCHAR NOT NULL
+    autor_id UUID NOT NULL ,
+    nome     VARCHAR NOT NULL
   ) ;
-ALTER TABLE nomeCitaBiblio ADD CONSTRAINT nomeCitaBiblio_PK PRIMARY KEY ( nome ) ;
+ALTER TABLE nome_cita_biblio ADD CONSTRAINT nome_cita_biblio_PK PRIMARY KEY ( autor_id, nome ) ;
 
 
 CREATE TABLE orientacao
   (
-    autorId      INTEGER NOT NULL ,
-    orientadorId INTEGER NOT NULL
+    autor_id      UUID NOT NULL ,
+    orientador_id UUID NOT NULL
   ) ;
-ALTER TABLE orientacao ADD CONSTRAINT orientacao_PK PRIMARY KEY ( autorId, orientadorId ) ;
+ALTER TABLE orientacao ADD CONSTRAINT orientacao_PK PRIMARY KEY ( autor_id, orientador_id ) ;
 
 
 CREATE TABLE orientador
   (
-    id    INTEGER NOT NULL ,
-    nome  VARCHAR NOT NULL ,
-    senha VARCHAR NOT NULL ,
-    email VARCHAR NOT NULL ,
+    id              UUID NOT NULL ,
+    nome            VARCHAR NOT NULL ,
+    senha           VARCHAR NOT NULL ,
+    email           VARCHAR NOT NULL,
     matricula_siape VARCHAR NOT NULL
   ) ;
 ALTER TABLE orientador ADD CONSTRAINT Orientador_PK PRIMARY KEY ( id ) ;
 
-CREATE TYPE tipo AS enum ('artigo', 'resenha', 'TCC');
+create type tipo as enum ('artigo', 'resenha', 'TCC');
 
-CREATE TYPE nivel AS enum ('graduação', 'mestradro', 'doutorado');
+create type nivel as enum ('graduação', 'mestradro', 'doutorado');
 
-CREATE TABLE trabalhoAcademico
+CREATE TABLE trabalho_academico
   (
-    id                INTEGER NOT NULL ,
-    titulo            VARCHAR NOT NULL ,
-    tipo              tipo,
-    nivel             nivel,
-    localDePublicacao VARCHAR ,
-    localDoArquivo    VARCHAR NOT NULL ,
-    dataDePublicacao  DATE NOT NULL ,
-    areaEstudoId      VARCHAR NOT NULL
+    id                 UUID NOT NULL ,
+    titulo             VARCHAR NOT NULL ,
+    tipo               tipo,
+    nivel              nivel,
+    local_publicacao   VARCHAR ,
+    local_arquivo      VARCHAR NOT NULL ,
+    data_publicacao    DATE NOT NULL ,
+    area_estudo_id     VARCHAR NOT NULL
   ) ;
-ALTER TABLE trabalhoAcademico ADD CONSTRAINT trabalhoAcademico_PK PRIMARY KEY ( id ) ;
+ALTER TABLE trabalho_academico ADD CONSTRAINT trabalhoAcademico_PK PRIMARY KEY ( id ) ;
 
 
 CREATE TABLE universidade
   (
-    id   INTEGER NOT NULL ,
+    id   UUID NOT NULL ,
     nome VARCHAR NOT NULL ,
     CNPJ VARCHAR NOT NULL
   ) ;
 ALTER TABLE universidade ADD CONSTRAINT Universidade_PK PRIMARY KEY ( id ) ;
 
 
-ALTER TABLE campus ADD CONSTRAINT Campus_Universidade_FK FOREIGN KEY ( universidadeId ) REFERENCES universidade ( id ) ;
+ALTER TABLE campus ADD CONSTRAINT Campus_Universidade_FK FOREIGN KEY ( universidade_id ) REFERENCES universidade ( id ) ;
 
-ALTER TABLE cria ADD CONSTRAINT Cria_Orientador_FK FOREIGN KEY ( orientadorId ) REFERENCES orientador ( id ) ;
+ALTER TABLE cria ADD CONSTRAINT Cria_Orientador_FK FOREIGN KEY ( orientador_id ) REFERENCES orientador ( id ) ;
 
-ALTER TABLE curso ADD CONSTRAINT Curso_Campus_FK FOREIGN KEY ( campusId, universidadeId ) REFERENCES campus ( id, universidadeId ) ;
+ALTER TABLE curso ADD CONSTRAINT Curso_Campus_FK FOREIGN KEY ( campus_id, universidade_id ) REFERENCES campus ( id, universidade_id ) ;
 
-ALTER TABLE dominio ADD CONSTRAINT Dominio_Universidade_FK FOREIGN KEY ( universidadeId ) REFERENCES universidade ( id ) ;
+ALTER TABLE dominio ADD CONSTRAINT Dominio_Universidade_FK FOREIGN KEY ( universidade_id ) REFERENCES universidade ( id ) ;
 
-ALTER TABLE cria ADD CONSTRAINT FK_ASS_49 FOREIGN KEY ( autorId ) REFERENCES autor ( id ) ;
+ALTER TABLE cria ADD CONSTRAINT FK_ASS_49 FOREIGN KEY ( autor_id ) REFERENCES autor ( id ) ;
 
-ALTER TABLE cria ADD CONSTRAINT FK_ASS_50 FOREIGN KEY ( trabalhoAcademicoId ) REFERENCES trabalhoAcademico ( id ) ;
+ALTER TABLE cria ADD CONSTRAINT FK_ASS_50 FOREIGN KEY ( trabalho_academico_id ) REFERENCES trabalho_academico ( id ) ;
 
-ALTER TABLE cursa ADD CONSTRAINT FK_ASS_53 FOREIGN KEY ( autorId ) REFERENCES autor ( id ) ;
+ALTER TABLE cursa ADD CONSTRAINT FK_ASS_53 FOREIGN KEY ( autor_id ) REFERENCES autor ( id ) ;
 
-ALTER TABLE cursa ADD CONSTRAINT FK_ASS_54 FOREIGN KEY ( cursoId, campusId, universidadeId ) REFERENCES curso ( id, campusId, universidadeId ) ;
+ALTER TABLE cursa ADD CONSTRAINT FK_ASS_54 FOREIGN KEY ( curso_id, campus_id, universidade_id ) REFERENCES curso ( id, campus_id, universidade_id ) ;
 
-ALTER TABLE orientacao ADD CONSTRAINT FK_ASS_58 FOREIGN KEY ( autorId ) REFERENCES autor ( id ) ;
+ALTER TABLE orientacao ADD CONSTRAINT FK_ASS_58 FOREIGN KEY ( autor_id ) REFERENCES autor ( id ) ;
 
-ALTER TABLE orientacao ADD CONSTRAINT FK_ASS_59 FOREIGN KEY ( orientadorId ) REFERENCES orientador ( id ) ;
+ALTER TABLE orientacao ADD CONSTRAINT FK_ASS_59 FOREIGN KEY ( orientador_id ) REFERENCES orientador ( id ) ;
 
-ALTER TABLE nomeCitaBiblio ADD CONSTRAINT nomeCitaBiblio_Autor_FK FOREIGN KEY ( autorId ) REFERENCES autor ( id ) ;
+ALTER TABLE nome_cita_biblio ADD CONSTRAINT nomeCitaBiblio_Autor_FK FOREIGN KEY ( autor_id ) REFERENCES autor ( id ) ;
 
-ALTER TABLE trabalhoAcademico ADD CONSTRAINT trabalhoAcademico_AreaEst_FK FOREIGN KEY ( areaEstudoId ) REFERENCES areaEstudo ( id ) ;
+ALTER TABLE trabalho_academico ADD CONSTRAINT trabalhoAcademico_AreaEst_FK FOREIGN KEY ( area_estudo_id ) REFERENCES area_estudo ( id ) ;
 
 
 -- Relatório do Resumo do Oracle SQL Developer Data Modeler: 
