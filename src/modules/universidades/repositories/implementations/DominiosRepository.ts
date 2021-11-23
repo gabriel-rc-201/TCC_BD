@@ -10,7 +10,7 @@ class DominiosRepository implements IDominioRepository {
   }
 
   async findeByNome(nome: string): Promise<Dominio> {
-    const dominio = await this.repository.findOne({ doninio: nome });
+    const dominio = await this.repository.findOne({ dominio: nome });
     return dominio;
   }
 
@@ -19,10 +19,10 @@ class DominiosRepository implements IDominioRepository {
     return dominios;
   }
 
-  async create({ dominio, universidadeid }: IDominiosDTO): Promise<void> {
+  async create({ dominio, universidade_id }: IDominiosDTO): Promise<void> {
     const newDomain = this.repository.create({
-      doninio: dominio,
-      universidadeid,
+      dominio,
+      universidade_id,
     });
     await this.repository.save(newDomain);
   }

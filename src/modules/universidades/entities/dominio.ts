@@ -1,19 +1,11 @@
-import { v4 as uuid } from "uuid";
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Entity, PrimaryColumn } from "typeorm";
 @Entity("dominio")
 class Dominio {
   @PrimaryColumn()
-  id?: string;
+  dominio: string;
 
-  @Column()
-  doninio: string;
-
-  @Column()
-  universidadeid: Number;
-
-  constructor() {
-    if (!this.id) this.id = uuid();
-  }
+  @PrimaryColumn()
+  universidade_id: string;
 }
 
 export { Dominio };

@@ -2,13 +2,13 @@ import { Dominio } from "../entities/dominio";
 
 interface IDominiosDTO {
   dominio: string;
-  universidadeid: number;
+  universidade_id: string;
 }
 
 interface IDominioRepository {
   findeByNome(domino: string): Promise<Dominio>;
   list(): Promise<Dominio[]>;
-  create({ dominio, universidadeid }: IDominiosDTO): Promise<void>;
+  create({ dominio, universidade_id }: IDominiosDTO): Promise<void>;
 }
 
 export { IDominioRepository, IDominiosDTO };

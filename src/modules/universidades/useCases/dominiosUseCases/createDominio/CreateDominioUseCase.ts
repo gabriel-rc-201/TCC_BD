@@ -5,7 +5,7 @@ import { IUniversidadeRepository } from "../../../repositories/IUniversidadesRep
 
 interface IRequest {
   dominio: string;
-  universidadeid: number;
+  universidade_id: string;
 }
 
 @injectable()
@@ -18,9 +18,9 @@ class CreateDominioUseCase {
     private universidadeRepository: IUniversidadeRepository
   ) {}
 
-  async execute({ dominio, universidadeid }: IRequest) {
+  async execute({ dominio, universidade_id }: IRequest) {
     const universidadeExists = await this.universidadeRepository.findById(
-      universidadeid
+      universidade_id
     );
 
     if (!universidadeExists) throw new AppError("universidade não existe!!!");
@@ -29,7 +29,7 @@ class CreateDominioUseCase {
 
     if (dominioExists) throw new AppError("domino ja está registrado!!!");
 
-    await this.dominioRepository.create({ dominio, universidadeid });
+    await this.dominioRepository.create({ dominio, universidade_id });
   }
 }
 
