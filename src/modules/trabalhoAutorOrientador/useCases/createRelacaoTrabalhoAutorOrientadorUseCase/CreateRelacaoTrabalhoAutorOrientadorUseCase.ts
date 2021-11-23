@@ -40,7 +40,7 @@ class CreateRealacaoTrabalhoAutorOrientador {
     const autorExists = await this.autorRepository.findById(autor_id);
     if (!autorExists)
       throw new AppError(
-        "Falha ao registrar o autor acadêmico na relação, autor não encontrado"
+        "Falha ao registrar o autor na relação, autor não encontrado"
       );
 
     const orientadorExists = await this.orientadorRepository.findById(
@@ -48,12 +48,14 @@ class CreateRealacaoTrabalhoAutorOrientador {
     );
     if (!orientadorExists)
       throw new AppError(
-        "Falha ao registrar o orientador acadêmico na relação, autor não encontrado"
+        "Falha ao registrar o orientador na relação, orientador não encontrado"
       );
 
-    const relacaoExists = await this.relacaoRepository.find(
-      trabalho_academico_id
-    );
+    const relacaoExists = await this.relacaoRepository.find({
+      trabalho_academico_id,
+      autor_id,
+      orientador_id,
+    });
     if (relacaoExists) {
       if (
         relacaoExists.autor_id === autor_id &&

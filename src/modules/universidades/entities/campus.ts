@@ -9,7 +9,7 @@ class Campus {
   @Column()
   nome: string;
 
-  @Column()
+  @PrimaryColumn()
   universidade_id: string;
 
   constructor() {

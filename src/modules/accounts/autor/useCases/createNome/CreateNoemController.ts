@@ -8,7 +8,11 @@ class CreateNomeController {
 
     const createNomeUseCase = container.resolve(CreateNomeUseCase);
 
-    await createNomeUseCase.execute(nome, autor_id);
+    try {
+      await createNomeUseCase.execute(nome, autor_id);
+    } catch (error) {
+      return res.json(error);
+    }
 
     return res.status(201).send();
   }

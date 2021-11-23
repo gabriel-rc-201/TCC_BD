@@ -22,9 +22,7 @@ class UniversidadeRepository implements IUniversidadeRepository {
   }
 
   async list(): Promise<Universidade[]> {
-    const universidades = await this.repository.find({
-      select: ["nome", "cnpj"],
-    });
+    const universidades = await this.repository.find();
     return universidades;
   }
 

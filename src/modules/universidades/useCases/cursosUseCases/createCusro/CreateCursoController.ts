@@ -8,13 +8,17 @@ class CreateCursoController {
 
     const createCursoUseCase = container.resolve(CreateCursoUseCase);
 
-    await createCursoUseCase.execute({
-      nome,
-      campus_id,
-      universidade_id,
-      turno,
-      modalidade,
-    });
+    try {
+      await createCursoUseCase.execute({
+        nome,
+        campus_id,
+        universidade_id,
+        turno,
+        modalidade,
+      });
+    } catch (error) {
+      return res.json(error);
+    }
 
     return res.status(201).send();
   }

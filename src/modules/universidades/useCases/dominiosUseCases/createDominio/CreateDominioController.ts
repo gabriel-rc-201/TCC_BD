@@ -8,7 +8,11 @@ class CreateDominioController {
 
     const createDominioUseCase = container.resolve(CreateDominioUseCase);
 
-    await createDominioUseCase.execute({ dominio, universidade_id });
+    try {
+      await createDominioUseCase.execute({ dominio, universidade_id });
+    } catch (error) {
+      return res.json(error).send();
+    }
 
     return res.status(201).send();
   }

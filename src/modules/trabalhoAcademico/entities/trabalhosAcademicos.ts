@@ -2,7 +2,7 @@ import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { Nivel, Tipo } from "../dtos/ITrabalhoAcademicoDTO";
 
-@Entity("trabalhoacademico")
+@Entity("trabalho_academico")
 class TrabalhosAcademicos {
   @PrimaryColumn()
   id?: string;

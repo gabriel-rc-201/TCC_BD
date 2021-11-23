@@ -17,7 +17,7 @@ class AutoresRepository implements IAutoresRepository {
 
   async list(): Promise<Autores[]> {
     const autores = await this.repository.find({
-      select: ["nome", "email"],
+      select: ["id", "nome", "email", "matricula"],
     });
 
     return autores;

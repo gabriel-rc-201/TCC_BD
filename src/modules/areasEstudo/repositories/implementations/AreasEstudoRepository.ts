@@ -13,7 +13,7 @@ class AreasEstudoRepository implements IAreaEstudoRepository {
   }
 
   async findById(id: string): Promise<AreaEstudo> {
-    const areaEstudo = await this.repository.findOne({ id });
+    const areaEstudo = await this.repository.findOne(id);
     return areaEstudo;
   }
 

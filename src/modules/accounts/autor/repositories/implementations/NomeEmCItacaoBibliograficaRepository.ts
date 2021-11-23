@@ -15,7 +15,7 @@ class NomeEmCitacaoBibliograficaRepository
   }
 
   findByNome(nome: string): Promise<NomeEmCitacaoBibliografica> {
-    const nome_ = this.repository.findOne(nome);
+    const nome_ = this.repository.findOne({ nome });
     return nome_;
   }
 

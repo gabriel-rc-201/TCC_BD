@@ -7,7 +7,11 @@ interface IRelacao {
 }
 
 interface ITrabalhoAutorOrientadorRepository {
-  find(trabalhoid: string): Promise<TrabalhoAutorOrientado>;
+  find({
+    autor_id,
+    orientador_id,
+    trabalho_academico_id,
+  }: IRelacao): Promise<TrabalhoAutorOrientado>;
   create({
     autor_id,
     orientador_id,

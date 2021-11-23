@@ -14,8 +14,16 @@ class TrabalhoAutorOrientadorRepository
     this.repository = getRepository(TrabalhoAutorOrientado);
   }
 
-  async find(trabalhoid: string): Promise<TrabalhoAutorOrientado> {
-    const relacao = await this.repository.findOne(trabalhoid);
+  async find({
+    autor_id,
+    orientador_id,
+    trabalho_academico_id,
+  }: IRelacao): Promise<TrabalhoAutorOrientado> {
+    const relacao = await this.repository.findOne({
+      autor_id,
+      orientador_id,
+      trabalho_academico_id,
+    });
     return relacao;
   }
 

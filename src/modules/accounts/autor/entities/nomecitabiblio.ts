@@ -1,6 +1,6 @@
 import { Entity, PrimaryColumn } from "typeorm";
 
-@Entity("nomecitabiblio")
+@Entity("nome_cita_biblio")
 class NomeEmCitacaoBibliografica {
   @PrimaryColumn()
   nome: string;

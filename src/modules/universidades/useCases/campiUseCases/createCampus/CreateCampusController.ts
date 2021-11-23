@@ -7,8 +7,11 @@ class CreateCampusController {
     const { nome, universidade_id } = req.body;
 
     const createCampusUseCase = container.resolve(CreateCampusUseCase);
-
-    await createCampusUseCase.execute({ nome, universidade_id });
+    try {
+      await createCampusUseCase.execute({ nome, universidade_id });
+    } catch (error) {
+      return res.json(error);
+    }
 
     return res.status(201).send();
   }

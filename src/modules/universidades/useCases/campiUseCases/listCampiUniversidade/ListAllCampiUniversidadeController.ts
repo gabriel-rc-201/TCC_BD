@@ -9,10 +9,17 @@ class ListAllCampiUniversidadeController {
     const listAllCampiUniversidadeUseCase = container.resolve(
       ListAllCampiUniversidadeUseCase
     );
+    const allCampi = [];
+    try {
+      const all = await listAllCampiUniversidadeUseCase.execute(
+        universidade_id
+      );
+      allCampi.push(all);
+    } catch (error) {
+      return res.json(error);
+    }
 
-    const all = await listAllCampiUniversidadeUseCase.execute(universidade_id);
-
-    return res.json(all);
+    return res.json(allCampi);
   }
 }
 

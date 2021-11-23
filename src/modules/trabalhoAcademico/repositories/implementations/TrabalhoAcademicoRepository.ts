@@ -16,7 +16,9 @@ class TrabalhosAcademicosRepository implements ITrabalhoAcademicoRepository {
   }
 
   async findByTitulo(titulo: string): Promise<TrabalhosAcademicos> {
-    const trabalho = await this.repository.findOne({ titulo });
+    const trabalho = await this.repository.findOne({
+      where: { titulo: titulo },
+    });
     return trabalho;
   }
 
