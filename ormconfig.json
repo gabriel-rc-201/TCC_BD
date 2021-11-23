@@ -6,8 +6,7 @@
   "password": "postgres",
   "database": "postgres",
   "entities": [
-    "./src/modules/areasEstudo/entities/*.ts",
-    "./src/modules/universidades/entities/*.ts",
+    "./src/modules/**/entities/*.ts",
     "./src/modules/accounts/autor/entities/*.ts",
     "./src/modules/accounts/orientador/entities/*.ts"
   ],

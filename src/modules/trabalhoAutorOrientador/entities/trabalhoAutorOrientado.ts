@@ -1,14 +1,14 @@
-import { Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, PrimaryColumn } from "typeorm";
 
 @Entity("cria")
 class TrabalhoAutorOrientado {
-  @PrimaryColumn()
+  @Column()
   autorid: number;
 
   @PrimaryColumn()
   trabalhoacademicoid: number;
 
-  @PrimaryColumn()
+  @Column()
   orientadorid: number;
 }
 

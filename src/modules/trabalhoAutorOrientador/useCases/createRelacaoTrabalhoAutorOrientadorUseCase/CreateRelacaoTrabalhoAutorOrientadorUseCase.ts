@@ -51,17 +51,20 @@ class CreateRealacaoTrabalhoAutorOrientador {
     const relacaoExists = await this.relacaoRepository.find(
       trabalhoacademicoid
     );
-    if (
-      relacaoExists.autorid === autorid &&
-      relacaoExists.orientadorid === orientadorid &&
-      relacaoExists.trabalhoacademicoid === trabalhoacademicoid
-    )
-      throw new AppError("relação ja exist");
+    if (relacaoExists) {
+      if (
+        relacaoExists.autorid === autorid &&
+        relacaoExists.orientadorid === orientadorid &&
+        relacaoExists.trabalhoacademicoid === trabalhoacademicoid
+      ) {
+        throw new AppError("relação ja exist");
+      }
+    }
 
     await this.relacaoRepository.create(
       autorid,
-      trabalhoacademicoid,
-      orientadorid
+      orientadorid,
+      trabalhoacademicoid
     );
   }
 }

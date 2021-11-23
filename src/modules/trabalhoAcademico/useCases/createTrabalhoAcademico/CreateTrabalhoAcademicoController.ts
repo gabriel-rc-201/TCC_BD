@@ -31,27 +31,44 @@ class CreateTrabalhoAcademicoController {
       CreateTrabalhoAcademicoUseCase
     );
 
-    await createTrabalhoAcademicoUseCase.execute({
-      titulo,
-      tipo,
-      nivel,
-      localdoarquivo,
-      localdepublicacao,
-      areaestudoid,
-    });
+    try {
+      await createTrabalhoAcademicoUseCase.execute({
+        titulo,
+        tipo,
+        nivel,
+        localdoarquivo,
+        localdepublicacao,
+        areaestudoid,
+      });
+    } catch (error) {
+      return res.status(400).json(error);
+    }
 
     const listTrabalhoByNome = container.resolve(ListTrabalhoByNome);
-    const trabalho = await listTrabalhoByNome.execute(titulo);
+    let trabalho = null;
+
+    try {
+      trabalho = await listTrabalhoByNome.execute(titulo);
+    } catch (error) {
+      return res.status(400).json(error);
+    }
 
     const createRealacaoTrabalhoAutorOrientador = container.resolve(
       CreateRealacaoTrabalhoAutorOrientador
     );
 
-    await createRealacaoTrabalhoAutorOrientador.execute(
-      autorid,
-      trabalho.id,
-      orientadorid
-    );
+    try {
+      console.log({ autorid: autorid });
+      await createRealacaoTrabalhoAutorOrientador.execute(
+        autorid,
+        trabalho.id,
+        orientadorid
+      );
+    } catch (error) {
+      return res
+        .status(400)
+        .json({ error, mensage: "erro ao registrar a relação" });
+    }
 
     return res.status(201).send();
   }

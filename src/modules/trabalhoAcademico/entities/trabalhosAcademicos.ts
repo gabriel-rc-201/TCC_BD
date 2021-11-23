@@ -21,7 +21,7 @@ class TrabalhosAcademicos {
   localdoarquivo: string;
 
   @CreateDateColumn()
-  data: Date;
+  datadepublicacao: Date;
 
   @Column()
   areaestudoid: string;
