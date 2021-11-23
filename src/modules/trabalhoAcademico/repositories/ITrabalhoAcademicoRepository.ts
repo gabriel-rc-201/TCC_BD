@@ -7,16 +7,15 @@ interface ITrabalhoAcademicoRepository {
     titulo,
     tipo,
     nivel,
-    localdoarquivo,
-    localdepublicacao,
-    areaestudoid,
+    local_arquivo,
+    local_publicacao,
+    area_estudo_id,
   }: ITrabalhoAcademicoDTO): Promise<void>;
 
   listAll(): Promise<TrabalhosAcademicos[]>;
-  listByArea(areaestudoid: string): Promise<TrabalhosAcademicos[]>;
+  listByArea(area_estudo_id: string): Promise<TrabalhosAcademicos[]>;
   findByTitulo(titulo: string): Promise<TrabalhosAcademicos>;
-  findById(id: number): Promise<TrabalhosAcademicos>;
-  findMaxId(): Promise<number>;
+  findById(id: string): Promise<TrabalhosAcademicos>;
 }
 
 export { ITrabalhoAcademicoRepository };

@@ -1,30 +1,36 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { v4 as uuid } from "uuid";
+import { Nivel, Tipo } from "../dtos/ITrabalhoAcademicoDTO";
 
 @Entity("trabalhoacademico")
 class TrabalhosAcademicos {
   @PrimaryColumn()
-  id: number;
+  id?: string;
 
   @Column()
   titulo: string;
 
-  @Column()
-  tipo: "artigo" | "resenha" | "TCC";
+  @Column({ type: "enum", enum: Tipo })
+  tipo: Tipo;
+
+  @Column({ type: "enum", enum: Nivel })
+  nivel: Nivel;
 
   @Column()
-  nivel: "graduação" | "mestradro" | "doutorado";
+  local_publicacao: string;
 
   @Column()
-  localdepublicacao: string;
-
-  @Column()
-  localdoarquivo: string;
+  local_arquivo: string;
 
   @CreateDateColumn()
-  datadepublicacao: Date;
+  data_publicacao: Date;
 
   @Column()
-  areaestudoid: string;
+  area_estudo_id: string;
+
+  constructor() {
+    if (!this.id) this.id = uuid();
+  }
 }
 
 export { TrabalhosAcademicos };

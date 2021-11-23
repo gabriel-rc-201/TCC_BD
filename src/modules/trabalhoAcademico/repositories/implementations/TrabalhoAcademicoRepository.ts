@@ -10,7 +10,7 @@ class TrabalhosAcademicosRepository implements ITrabalhoAcademicoRepository {
     this.repository = getRepository(TrabalhosAcademicos);
   }
 
-  async findById(id: number): Promise<TrabalhosAcademicos> {
+  async findById(id: string): Promise<TrabalhosAcademicos> {
     const trabalho = await this.repository.findOne(id);
     return trabalho;
   }
@@ -25,20 +25,20 @@ class TrabalhosAcademicosRepository implements ITrabalhoAcademicoRepository {
     titulo,
     tipo,
     nivel,
-    localdoarquivo,
-    localdepublicacao,
-    areaestudoid,
-    data,
+    local_arquivo,
+    local_publicacao,
+    area_estudo_id,
+    data_publicacao,
   }: ITrabalhoAcademicoDTO): Promise<void> {
     const trabalho = this.repository.create({
       id,
       titulo,
       tipo,
       nivel,
-      localdoarquivo,
-      localdepublicacao,
-      datadepublicacao: data,
-      areaestudoid,
+      local_arquivo,
+      local_publicacao,
+      data_publicacao,
+      area_estudo_id,
     });
 
     await this.repository.save(trabalho);
@@ -49,26 +49,9 @@ class TrabalhosAcademicosRepository implements ITrabalhoAcademicoRepository {
     return trabalhos;
   }
 
-  async listByArea(areaestudoid: string): Promise<TrabalhosAcademicos[]> {
-    const trabalhos = await this.repository.find({ areaestudoid });
+  async listByArea(area_estudo_id: string): Promise<TrabalhosAcademicos[]> {
+    const trabalhos = await this.repository.find({ area_estudo_id });
     return trabalhos;
-  }
-
-  async findMaxId(): Promise<number> {
-    const ids = await this.repository.find({
-      select: ["id"],
-      order: { id: "DESC" },
-      take: 1,
-    });
-
-    if (ids.length === 0) return 0;
-
-    const idNumber = ids[0].id;
-
-    let idString = idNumber.toString();
-    let id = parseInt(idString);
-
-    return id;
   }
 }
 

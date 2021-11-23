@@ -1,15 +1,16 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../errors/AppErros";
 import { IAreaEstudoRepository } from "../../../areasEstudo/repositories/IAreasEstudoRepository";
+import { Nivel, Tipo } from "../../dtos/ITrabalhoAcademicoDTO";
 import { ITrabalhoAcademicoRepository } from "../../repositories/ITrabalhoAcademicoRepository";
 
 interface IRequest {
   titulo: string;
-  tipo: "artigo" | "resenha" | "TCC";
-  nivel: "graduação" | "mestradro" | "doutorado";
-  localdepublicacao: string;
-  localdoarquivo: string;
-  areaestudoid: string;
+  tipo: Tipo;
+  nivel: Nivel;
+  local_publicacao: string;
+  local_arquivo: string;
+  area_estudo_id: string;
 }
 
 @injectable()
@@ -26,11 +27,11 @@ class CreateTrabalhoAcademicoUseCase {
     titulo,
     tipo,
     nivel,
-    localdoarquivo,
-    localdepublicacao,
-    areaestudoid,
+    local_arquivo,
+    local_publicacao,
+    area_estudo_id,
   }: IRequest) {
-    const areaExists = await this.areaRepository.findById(areaestudoid);
+    const areaExists = await this.areaRepository.findById(area_estudo_id);
     if (!areaExists)
       throw new AppError(
         "Area de estudo não encontrada, verifica o códio da área de estudo"
@@ -42,16 +43,14 @@ class CreateTrabalhoAcademicoUseCase {
         "Trabalho ja está cadastrado, por fafor tente outro titulo"
       );
 
-    const id = (await this.trabalhoRepository.findMaxId()) + 1;
     await this.trabalhoRepository.create({
-      id,
-      areaestudoid,
-      localdepublicacao,
-      localdoarquivo,
+      area_estudo_id,
+      local_publicacao,
+      local_arquivo,
       nivel,
       tipo,
       titulo,
-      data: new Date(),
+      data_publicacao: new Date(),
     });
   }
 }

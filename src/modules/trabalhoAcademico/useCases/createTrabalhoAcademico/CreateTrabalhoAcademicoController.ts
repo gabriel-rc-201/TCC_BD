@@ -20,9 +20,9 @@ class CreateTrabalhoAcademicoController {
       titulo,
       tipo,
       nivel,
-      localdoarquivo,
-      localdepublicacao,
-      areaestudoid,
+      local_arquivo,
+      local_publicacao,
+      area_estudo_id,
       autor_id,
       orientadorid,
     } = req.body;
@@ -36,9 +36,9 @@ class CreateTrabalhoAcademicoController {
         titulo,
         tipo,
         nivel,
-        localdoarquivo,
-        localdepublicacao,
-        areaestudoid,
+        local_arquivo,
+        local_publicacao,
+        area_estudo_id,
       });
     } catch (error) {
       return res.status(400).json(error);
