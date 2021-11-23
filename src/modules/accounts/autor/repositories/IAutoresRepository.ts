@@ -5,7 +5,6 @@ interface IAutoresRepository {
   create(data: IAutoresDTO): Promise<void>;
   findByMatricula(matricula: string): Promise<Autores>;
   findById(id: number): Promise<Autores>;
-  findMaxId(): Promise<number>;
   list(): Promise<Autores[]>;
 }
 
