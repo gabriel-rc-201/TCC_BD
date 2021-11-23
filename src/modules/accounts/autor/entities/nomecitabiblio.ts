@@ -1,11 +1,11 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Entity, PrimaryColumn } from "typeorm";
 
 @Entity("nomecitabiblio")
 class NomeEmCitacaoBibliografica {
   @PrimaryColumn()
   nome: string;
 
-  @Column()
+  @PrimaryColumn()
   autor_id: string;
 }
 
