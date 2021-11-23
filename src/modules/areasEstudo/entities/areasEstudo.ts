@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryColumn } from "typeorm";
 
-@Entity("areaestudo")
+@Entity("area_estudo")
 class AreaEstudo {
   @PrimaryColumn()
   id: string;
