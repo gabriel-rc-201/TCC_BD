@@ -23,10 +23,7 @@ class CreateUniversidadeUseCase {
       throw new AppError("Universidade ja está registrada");
     }
 
-    const id =
-      parseInt((await this.universidadeRepository.findMaxId()).toString()) + 1;
-
-    await this.universidadeRepository.create({ id, nome, cnpj });
+    await this.universidadeRepository.create({ nome, cnpj });
   }
 }
 

@@ -11,7 +11,7 @@ class UniversidadeRepository implements IUniversidadeRepository {
   constructor() {
     this.repository = getRepository(Universidade);
   }
-  async findById(id: number): Promise<Universidade> {
+  async findById(id: string): Promise<Universidade> {
     const universidade = await this.repository.findOne(id);
     return universidade;
   }
@@ -26,23 +26,6 @@ class UniversidadeRepository implements IUniversidadeRepository {
       select: ["nome", "cnpj"],
     });
     return universidades;
-  }
-
-  async findMaxId(): Promise<number> {
-    const ids = await this.repository.find({
-      select: ["id"],
-      order: { id: "DESC" },
-      take: 1,
-    });
-
-    if (ids.length === 0) return 0;
-
-    const idNumber = ids[0].id;
-
-    let idString = idNumber.toString();
-    let id = parseInt(idString);
-
-    return id;
   }
 
   async create({ id, nome, cnpj }: IUniversidadeDTO): Promise<void> {

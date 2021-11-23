@@ -14,7 +14,7 @@ class UniversidadesRepositoryInMemory implements IUniversidadeRepository {
     return universidade;
   }
 
-  async findById(id: number): Promise<Universidade> {
+  async findById(id: string): Promise<Universidade> {
     return this.universidade.find((universidade) => universidade.id === id);
   }
 
@@ -32,19 +32,6 @@ class UniversidadesRepositoryInMemory implements IUniversidadeRepository {
     });
 
     this.universidade.push(universidade);
-  }
-
-  async findMaxId(): Promise<number> {
-    const ids = this.universidade;
-
-    if (ids.length === 0) return 0;
-
-    const idNumber = ids[ids.length - 1].id;
-    const idString = idNumber.toString();
-
-    const id = parseInt(idString);
-
-    return id;
   }
 }
 
