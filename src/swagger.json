@@ -224,8 +224,12 @@
                   "nome": { "type": "string" },
                   "campusid": { "type": "number" },
                   "universidadeid": { "type": "number" },
-                  "turno": { "type": "string" },
-                  "modalidade": { "type": "string" }
+                  "turno": {
+                    "type": "\"diurno\" | \"noturno\" | \"integral\""
+                  },
+                  "modalidade": {
+                    "type": "\"licenciatura\" | \"bacharelado\" | \"bacharelado e licenciatura\""
+                  }
                 },
                 "example": {
                   "nome": "Engenharia de Computação",
