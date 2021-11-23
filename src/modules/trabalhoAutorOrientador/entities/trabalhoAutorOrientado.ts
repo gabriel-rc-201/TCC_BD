@@ -1,15 +1,15 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Entity, PrimaryColumn } from "typeorm";
 
 @Entity("cria")
 class TrabalhoAutorOrientado {
-  @Column()
-  autor_id: number;
+  @PrimaryColumn()
+  autor_id: string;
 
   @PrimaryColumn()
-  trabalhoacademicoid: number;
+  trabalho_academico_id: string;
 
-  @Column()
-  orientadorid: number;
+  @PrimaryColumn()
+  orientador_id: string;
 }
 
 export { TrabalhoAutorOrientado };

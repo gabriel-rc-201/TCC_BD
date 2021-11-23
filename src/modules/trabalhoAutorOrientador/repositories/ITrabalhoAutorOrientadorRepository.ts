@@ -1,12 +1,18 @@
 import { TrabalhoAutorOrientado } from "../entities/trabalhoAutorOrientado";
 
-interface ITrabalhoAutorOrientadorRepository {
-  find(trabalhoid: number): Promise<TrabalhoAutorOrientado>;
-  create(
-    autor_id: number,
-    orientadorid: number,
-    trabalhoacademicoid: number
-  ): Promise<void>;
+interface IRelacao {
+  autor_id: string;
+  orientador_id: string;
+  trabalho_academico_id: string;
 }
 
-export { ITrabalhoAutorOrientadorRepository };
+interface ITrabalhoAutorOrientadorRepository {
+  find(trabalhoid: string): Promise<TrabalhoAutorOrientado>;
+  create({
+    autor_id,
+    orientador_id,
+    trabalho_academico_id,
+  }: IRelacao): Promise<void>;
+}
+
+export { ITrabalhoAutorOrientadorRepository, IRelacao };

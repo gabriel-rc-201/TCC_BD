@@ -24,7 +24,7 @@ class CreateTrabalhoAcademicoController {
       local_publicacao,
       area_estudo_id,
       autor_id,
-      orientadorid,
+      orientador_id,
     } = req.body;
 
     const createTrabalhoAcademicoUseCase = container.resolve(
@@ -59,11 +59,11 @@ class CreateTrabalhoAcademicoController {
 
     try {
       console.log({ autor_id: autor_id });
-      await createRealacaoTrabalhoAutorOrientador.execute(
+      await createRealacaoTrabalhoAutorOrientador.execute({
         autor_id,
-        trabalho.id,
-        orientadorid
-      );
+        trabalho_academico_id: trabalho.id,
+        orientador_id,
+      });
     } catch (error) {
       return res
         .status(400)

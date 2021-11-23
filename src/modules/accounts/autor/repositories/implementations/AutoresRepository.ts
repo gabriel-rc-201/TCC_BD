@@ -10,7 +10,7 @@ class AutoresRepository implements IAutoresRepository {
     this.repository = getRepository(Autores);
   }
 
-  async findById(id: number): Promise<Autores> {
+  async findById(id: string): Promise<Autores> {
     const autor = await this.repository.findOne(id);
     return autor;
   }
