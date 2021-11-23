@@ -9,8 +9,8 @@ class ListAllCampiUniversidadeUseCase {
     private repository: ICampiRepository
   ) {}
 
-  async execute(universidadeid: number): Promise<Campus[]> {
-    const campi = await this.repository.listCampiUniversidade(universidadeid);
+  async execute(universidade_id: string): Promise<Campus[]> {
+    const campi = await this.repository.listCampiUniversidade(universidade_id);
 
     return campi;
   }

@@ -1,25 +1,24 @@
-import { Curso } from "../entities/curso";
+import { Curso, Modalidade, Turno } from "../entities/curso";
 
 interface ICursoDTO {
-  id: Number;
+  id?: string;
   nome: string;
-  campusid: number;
-  universidadeid: number;
-  turno: "diurno" | "noturno" | "integral";
-  modalidade: "licenciatura" | "bacharelado" | "bacharelado e licenciatura";
+  campus_id: string;
+  universidade_id: string;
+  turno: Turno;
+  modalidade: Modalidade;
 }
 
 interface ICursoRepository {
   create(curso: ICursoDTO): Promise<void>;
-  listCursoCampus(campusid: number): Promise<Curso[]>;
-  listCursoUniversidade(universidadeid: number): Promise<Curso[]>;
+  listCursoCampus(campus_id: string): Promise<Curso[]>;
+  listCursoUniversidade(universidade_id: string): Promise<Curso[]>;
   findByNome(nome: string): Promise<Curso[]>;
   findEspecificCourse(
     nome: string,
-    turno: "diurno" | "noturno" | "integral",
-    modalidade: "licenciatura" | "bacharelado" | "bacharelado e licenciatura"
+    turno: Turno,
+    modalidade: Modalidade
   ): Promise<Curso>;
-  findMaxId(): Promise<number>;
 }
 
 export { ICursoRepository, ICursoDTO };

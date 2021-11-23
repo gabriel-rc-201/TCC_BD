@@ -4,7 +4,7 @@ import { ICampiRepository } from "../../../repositories/ICampiRepository";
 import { IUniversidadeRepository } from "../../../repositories/IUniversidadesRepository";
 
 interface IRequest {
-  universidadeid: number;
+  universidade_id: string;
   nome: string;
 }
 
@@ -18,9 +18,9 @@ class CreateCampusUseCase {
     private universidadeRepository: IUniversidadeRepository
   ) {}
 
-  async execute({ nome, universidadeid }: IRequest) {
+  async execute({ nome, universidade_id }: IRequest) {
     const universidadeExists = await this.universidadeRepository.findById(
-      universidadeid
+      universidade_id
     );
 
     if (!universidadeExists)
@@ -32,10 +32,7 @@ class CreateCampusUseCase {
 
     if (campusExists) throw new AppError("esse campus ja foi registrado!!!");
 
-    const id =
-      parseInt((await this.campusRepository.findMaxId()).toString()) + 1;
-
-    await this.campusRepository.create({ id, nome, universidadeid });
+    await this.campusRepository.create({ nome, universidade_id });
   }
 }
 

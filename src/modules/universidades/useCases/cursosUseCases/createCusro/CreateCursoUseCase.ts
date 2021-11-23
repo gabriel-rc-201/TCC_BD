@@ -1,15 +1,16 @@
 import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../../errors/AppErros";
+import { Modalidade, Turno } from "../../../entities/curso";
 import { ICampiRepository } from "../../../repositories/ICampiRepository";
 import { ICursoRepository } from "../../../repositories/ICursoRepository";
 import { IUniversidadeRepository } from "../../../repositories/IUniversidadesRepository";
 
 interface IRequest {
   nome: string;
-  campusid: number;
-  universidadeid: number;
-  turno: "diurno" | "noturno" | "integral";
-  modalidade: "licenciatura" | "bacharelado" | "bacharelado e licenciatura";
+  campus_id: string;
+  universidade_id: string;
+  turno: Turno;
+  modalidade: Modalidade;
 }
 
 @injectable()
@@ -27,13 +28,13 @@ class CreateCursoUseCase {
 
   async execute({
     nome,
-    campusid,
-    universidadeid,
+    campus_id,
+    universidade_id,
     turno,
     modalidade,
   }: IRequest) {
     const universidadeExists = await this.universidadeRepository.findById(
-      universidadeid
+      universidade_id
     );
 
     if (!universidadeExists)
@@ -41,7 +42,7 @@ class CreateCursoUseCase {
         "Universidade não existe!!!\nVocê não pode registrar um curso sem uma universidasde!!!"
       );
 
-    const campusExists = await this.campusRepository.findById(campusid);
+    const campusExists = await this.campusRepository.findById(campus_id);
 
     if (!campusExists)
       throw new AppError(
@@ -56,16 +57,12 @@ class CreateCursoUseCase {
 
     if (cursoExists) throw new AppError("Esse curso ja foi registrado!!!");
 
-    const id =
-      parseInt((await this.cursoRepository.findMaxId()).toString()) + 1;
-
     await this.cursoRepository.create({
-      id,
       nome,
       turno,
       modalidade,
-      campusid,
-      universidadeid,
+      campus_id,
+      universidade_id,
     });
   }
 }

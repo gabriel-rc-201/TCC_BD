@@ -1,25 +1,40 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
-import { Campus } from "./campus";
+import { Column, Entity, PrimaryColumn } from "typeorm";
+import { v4 as uuid } from "uuid";
 
+enum Modalidade {
+  lincenciatura = "licenciatura",
+  bacharelado = "bacharelado",
+  bachareladoLincenciatura = "bacharelado e licenciatura",
+}
+
+enum Turno {
+  diurno = "diurno",
+  noturno = "noturno",
+  integral = "integral",
+}
 @Entity("curso")
 class Curso {
   @PrimaryColumn()
-  id: Number;
+  id?: string;
 
   @Column()
   nome: string;
 
-  @Column()
-  turno: string;
+  @Column({ type: "enum", enum: Turno })
+  turno: Turno;
 
-  @Column()
-  modalidade: string;
+  @Column({ type: "enum", enum: Modalidade })
+  modalidade: Modalidade;
 
-  @Column()
-  campusid: Number;
+  @PrimaryColumn()
+  campus_id: string;
 
-  @Column()
-  universidadeid: Number;
+  @PrimaryColumn()
+  universidade_id: string;
+
+  constructor() {
+    if (!this.id) this.id = uuid();
+  }
 }
 
-export { Curso };
+export { Curso, Turno, Modalidade };

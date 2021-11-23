@@ -1,16 +1,20 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from "typeorm";
-import { Universidade } from "./universidades";
+import { Column, Entity, PrimaryColumn } from "typeorm";
+import { v4 as uuid } from "uuid";
 
 @Entity("campus")
 class Campus {
   @PrimaryColumn()
-  id: Number;
+  id?: string;
 
   @Column()
   nome: string;
 
   @Column()
-  universidadeid: Number;
+  universidade_id: string;
+
+  constructor() {
+    if (!this.id) this.id = uuid();
+  }
 }
 
 export { Campus };

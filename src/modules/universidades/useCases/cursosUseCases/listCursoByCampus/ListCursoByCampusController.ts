@@ -4,13 +4,13 @@ import { ListCursoByCampusUseCase } from "./ListCursoByCampusUseCase";
 
 class ListCursoByCampusController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { campusid } = req.body;
+    const { campus_id } = req.body;
 
     const listCursoByCampusUseCase = container.resolve(
       ListCursoByCampusUseCase
     );
 
-    const all = await listCursoByCampusUseCase.execute(campusid);
+    const all = await listCursoByCampusUseCase.execute(campus_id);
 
     return res.json(all);
   }

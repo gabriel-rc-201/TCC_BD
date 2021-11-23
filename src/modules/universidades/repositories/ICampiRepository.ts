@@ -1,17 +1,16 @@
 import { Campus } from "../entities/campus";
 
 interface ICampusDTO {
-  id: Number;
+  id?: string;
   nome: string;
-  universidadeid: Number;
+  universidade_id: string;
 }
 
 interface ICampiRepository {
-  listCampiUniversidade(universidadeid: Number): Promise<Campus[]>;
+  listCampiUniversidade(universidade_id: string): Promise<Campus[]>;
   findByNome(nome: string): Promise<Campus>;
-  findById(id: number): Promise<Campus>;
-  create({ id, nome, universidadeid }: ICampusDTO): Promise<void>;
-  findMaxId(): Promise<number>;
+  findById(id: string): Promise<Campus>;
+  create({ id, nome, universidade_id }: ICampusDTO): Promise<void>;
 }
 
 export { ICampiRepository, ICampusDTO };

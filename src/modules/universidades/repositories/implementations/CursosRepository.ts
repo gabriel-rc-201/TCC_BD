@@ -1,5 +1,5 @@
 import { getRepository, Repository } from "typeorm";
-import { Curso } from "../../entities/curso";
+import { Curso, Modalidade, Turno } from "../../entities/curso";
 import { ICursoDTO, ICursoRepository } from "../ICursoRepository";
 
 class CursosRepository implements ICursoRepository {
@@ -10,20 +10,20 @@ class CursosRepository implements ICursoRepository {
   }
   async findEspecificCourse(
     nome: string,
-    turno: "diurno" | "noturno" | "integral",
-    modalidade: "licenciatura" | "bacharelado" | "bacharelado e licenciatura"
+    turno: Turno,
+    modalidade: Modalidade
   ): Promise<Curso> {
     const curso = this.repository.findOne({ nome, turno, modalidade });
     return curso;
   }
 
   async create(curso: ICursoDTO): Promise<void> {
-    const { id, campusid, universidadeid, nome, modalidade, turno } = curso;
+    const { id, campus_id, universidade_id, nome, modalidade, turno } = curso;
 
     const newCurso = this.repository.create({
       id,
-      campusid,
-      universidadeid,
+      campus_id,
+      universidade_id,
       nome,
       modalidade,
       turno,
@@ -32,36 +32,19 @@ class CursosRepository implements ICursoRepository {
     await this.repository.save(newCurso);
   }
 
-  async listCursoCampus(campusid: Number): Promise<Curso[]> {
-    const cursos = await this.repository.find({ campusid });
+  async listCursoCampus(campus_id: string): Promise<Curso[]> {
+    const cursos = await this.repository.find({ campus_id });
     return cursos;
   }
 
-  async listCursoUniversidade(universidadeid: Number): Promise<Curso[]> {
-    const cursos = await this.repository.find({ universidadeid });
+  async listCursoUniversidade(universidade_id: string): Promise<Curso[]> {
+    const cursos = await this.repository.find({ universidade_id });
     return cursos;
   }
 
   async findByNome(nome: string): Promise<Curso[]> {
     const cursos = await this.repository.find({ nome });
     return cursos;
-  }
-
-  async findMaxId(): Promise<number> {
-    const ids = await this.repository.find({
-      select: ["id"],
-      order: { id: "DESC" },
-      take: 1,
-    });
-
-    if (ids.length === 0) return 0;
-
-    const idNumber = ids[0].id;
-
-    let idString = idNumber.toString();
-    let id = parseInt(idString);
-
-    return id;
   }
 }
 

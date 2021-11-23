@@ -4,13 +4,13 @@ import { ListAllCampiUniversidadeUseCase } from "./ListAllCampiUniversidadeUseCa
 
 class ListAllCampiUniversidadeController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { universidadeid } = req.body;
+    const { universidade_id } = req.body;
 
     const listAllCampiUniversidadeUseCase = container.resolve(
       ListAllCampiUniversidadeUseCase
     );
 
-    const all = await listAllCampiUniversidadeUseCase.execute(universidadeid);
+    const all = await listAllCampiUniversidadeUseCase.execute(universidade_id);
 
     return res.json(all);
   }

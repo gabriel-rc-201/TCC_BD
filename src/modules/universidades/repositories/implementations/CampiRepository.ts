@@ -9,13 +9,13 @@ class CampiRepository implements ICampiRepository {
     this.repository = getRepository(Campus);
   }
 
-  async findById(id: number): Promise<Campus> {
+  async findById(id: string): Promise<Campus> {
     const campus = await this.repository.findOne({ id });
     return campus;
   }
 
-  async listCampiUniversidade(universidadeid: Number): Promise<Campus[]> {
-    const campi = await this.repository.find({ universidadeid });
+  async listCampiUniversidade(universidade_id: string): Promise<Campus[]> {
+    const campi = await this.repository.find({ universidade_id });
     return campi;
   }
 
@@ -24,26 +24,9 @@ class CampiRepository implements ICampiRepository {
     return campus;
   }
 
-  async create({ id, nome, universidadeid }: ICampusDTO): Promise<void> {
-    const campus = this.repository.create({ id, nome, universidadeid });
+  async create({ id, nome, universidade_id }: ICampusDTO): Promise<void> {
+    const campus = this.repository.create({ id, nome, universidade_id });
     await this.repository.save(campus);
-  }
-
-  async findMaxId(): Promise<number> {
-    const ids = await this.repository.find({
-      select: ["id"],
-      order: { id: "DESC" },
-      take: 1,
-    });
-
-    if (ids.length === 0) return 0;
-
-    const idNumber = ids[0].id;
-
-    let idString = idNumber.toString();
-    let id = parseInt(idString);
-
-    return id;
   }
 }
 
