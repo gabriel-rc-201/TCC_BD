@@ -10,9 +10,7 @@
 
 import { Request, Response } from "express";
 import { container } from "tsyringe";
-import { AutoresRepository } from "../../../accounts/autor/repositories/implementations/AutoresRepository";
-import { OrientadoresRepository } from "../../../accounts/orientador/repositories/implementations/OrientadoresRepository";
-import { CreateRealacaoTrabalhoAutorOrientador } from "../../../trabalhoAutorOrientador/useCases/createRelacaoTrabalhoAutorOrientadorUseCase/CreateRelacaoTrabalhoAutorOrientadorUseCase";
+import { CreateRelacaoTrabalhoAutorOrientador } from "../../../trabalhoAutorOrientador/useCases/createRelacaoTrabalhoAutorOrientadorUseCase/CreateRelacaoTrabalhoAutorOrientadorUseCase";
 import { ListTrabalhoByNome } from "../listTrabalhoByNome/ListTrabalhoByNomeUseCase";
 import { CreateTrabalhoAcademicoUseCase } from "./CreateTrabalhoAcademicoUseCase";
 
@@ -62,7 +60,7 @@ class CreateTrabalhoAcademicoController {
     }
 
     const createRealacaoTrabalhoAutorOrientador = container.resolve(
-      CreateRealacaoTrabalhoAutorOrientador
+      CreateRelacaoTrabalhoAutorOrientador
     );
 
     try {

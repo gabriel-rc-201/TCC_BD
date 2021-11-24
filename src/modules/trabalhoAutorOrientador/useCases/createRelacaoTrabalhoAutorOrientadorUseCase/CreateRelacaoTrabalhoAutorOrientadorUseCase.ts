@@ -9,7 +9,7 @@ import {
 } from "../../repositories/ITrabalhoAutorOrientadorRepository";
 
 @injectable()
-class CreateRealacaoTrabalhoAutorOrientador {
+class CreateRelacaoTrabalhoAutorOrientador {
   constructor(
     @inject("RelacaoTrabalhoAutorOrientador")
     private relacaoRepository: ITrabalhoAutorOrientadorRepository,
@@ -74,4 +74,4 @@ class CreateRealacaoTrabalhoAutorOrientador {
   }
 }
 
-export { CreateRealacaoTrabalhoAutorOrientador };
+export { CreateRelacaoTrabalhoAutorOrientador };
