@@ -30,4 +30,4 @@ class RelacaoAutorOrientadorRepository
   }
 }
 
-export { RelacaoAutorOrientador };
+export { RelacaoAutorOrientadorRepository };
