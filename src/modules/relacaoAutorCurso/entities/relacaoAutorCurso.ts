@@ -18,7 +18,7 @@ class RelacaoAutorCurso {
   data_inicio: Date;
 
   @Column()
-  data_fim: Date;
+  data_fim?: Date;
 }
 
 export { RelacaoAutorCurso };
