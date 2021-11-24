@@ -22,6 +22,8 @@ import { ITrabalhoAutorOrientadorRepository } from "../../modules/trabalhoAutorO
 import { TrabalhoAutorOrientadorRepository } from "../../modules/trabalhoAutorOrientador/repositories/implementations/TrabalhoAutorOrientadorRepository";
 import { IRelacaoAutorCursoRepository } from "../../modules/relacaoAutorCurso/repositories/IRelacaoAutorCursoRepository";
 import { RelacaoAutorCursoRepository } from "../../modules/relacaoAutorCurso/repositories/implementations/RelacaoAutorCurso";
+import { IRelacaoAutorOrientadorRepository } from "../../modules/relacaoAutorOrientador/repositories/IRelacaoAutorOrientador";
+import { RelacaoAutorOrientadorRepository } from "../../modules/relacaoAutorOrientador/repositories/implementations/RelacaoAutorOrientador";
 
 container.registerSingleton<IAreaEstudoRepository>(
   "AreasEstudoRepository",
@@ -76,4 +78,9 @@ container.registerSingleton<ITrabalhoAutorOrientadorRepository>(
 container.registerSingleton<IRelacaoAutorCursoRepository>(
   "RelacaoAutorCurso",
   RelacaoAutorCursoRepository
+);
+
+container.registerSingleton<IRelacaoAutorOrientadorRepository>(
+  "RelacaoAutorOrientador",
+  RelacaoAutorOrientadorRepository
 );
