@@ -14,11 +14,16 @@ interface ICursoRepository {
   listCursoCampus(campus_id: string): Promise<Curso[]>;
   listCursoUniversidade(universidade_id: string): Promise<Curso[]>;
   findByNome(nome: string): Promise<Curso[]>;
+  findById(
+    id: string,
+    campus_id: string,
+    universidade_id: string
+  ): Promise<Curso>;
   findEspecificCourse(
     nome: string,
     turno: Turno,
     modalidade: Modalidade
-  ): Promise<Curso>;
+  ): Promise<Curso[]>;
 }
 
 export { ICursoRepository, ICursoDTO };

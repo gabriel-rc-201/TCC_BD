@@ -8,13 +8,26 @@ class CursosRepository implements ICursoRepository {
   constructor() {
     this.repository = getRepository(Curso);
   }
+  async findById(
+    id: string,
+    campus_id: string,
+    universidade_id: string
+  ): Promise<Curso> {
+    const curso = await this.repository.findOne({
+      id,
+      campus_id,
+      universidade_id,
+    });
+    return curso;
+  }
+
   async findEspecificCourse(
     nome: string,
     turno: Turno,
     modalidade: Modalidade
-  ): Promise<Curso> {
-    const curso = this.repository.findOne({ nome, turno, modalidade });
-    return curso;
+  ): Promise<Curso[]> {
+    const cursos = await this.repository.find({ nome, turno, modalidade });
+    return cursos;
   }
 
   async create(curso: ICursoDTO): Promise<void> {
