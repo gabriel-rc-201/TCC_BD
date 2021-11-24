@@ -33,16 +33,6 @@ class CreateTrabalhoAcademicoController {
       CreateTrabalhoAcademicoUseCase
     );
 
-    const autorRepository = new AutoresRepository();
-    const autorExists = autorRepository.findById(autor_id);
-    if (!autorExists)
-      return res.json({ mensagem: "autor não encontrado" }).status(400);
-
-    const orientadorRepository = new OrientadoresRepository();
-    const orientadorExists = orientadorRepository.findById(orientador_id);
-    if (!orientadorExists)
-      return res.json({ mensagem: "orientador não encontrado" }).status(400);
-
     try {
       await createTrabalhoAcademicoUseCase.execute({
         titulo,
@@ -51,6 +41,8 @@ class CreateTrabalhoAcademicoController {
         local_arquivo,
         local_publicacao,
         area_estudo_id,
+        autor_id,
+        orientador_id,
       });
     } catch (error) {
       return res

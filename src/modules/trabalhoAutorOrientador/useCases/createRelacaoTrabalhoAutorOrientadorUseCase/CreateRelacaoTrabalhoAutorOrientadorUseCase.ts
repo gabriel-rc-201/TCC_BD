@@ -15,7 +15,13 @@ class CreateRealacaoTrabalhoAutorOrientador {
     private relacaoRepository: ITrabalhoAutorOrientadorRepository,
 
     @inject("TrabalhoAcademico")
-    private trabalhoRepository: ITrabalhoAcademicoRepository
+    private trabalhoRepository: ITrabalhoAcademicoRepository,
+
+    @inject("OrientadoresRepository")
+    private orientadorRepository: IOrientadoresRepository,
+
+    @inject("AutoresRepository")
+    private autorRepository: IAutoresRepository
   ) {}
 
   async execute({
@@ -31,6 +37,20 @@ class CreateRealacaoTrabalhoAutorOrientador {
         "Falha ao registrar o trabalho acadêmico na relação, trabalho não encontrado"
       );
 
+    const autorExists = await this.autorRepository.findById(autor_id);
+    if (!autorExists)
+      throw new AppError(
+        "Falha ao registrar o autor na relação, autor não encontrado"
+      );
+
+    const orientadorExists = await this.orientadorRepository.findById(
+      orientador_id
+    );
+    if (!orientadorExists)
+      throw new AppError(
+        "Falha ao registrar o orientador na relação, orientador não encontrado"
+      );
+
     const relacaoExists = await this.relacaoRepository.find({
       trabalho_academico_id,
       autor_id,
@@ -42,7 +62,7 @@ class CreateRealacaoTrabalhoAutorOrientador {
         relacaoExists.orientador_id === orientador_id &&
         relacaoExists.trabalho_academico_id === trabalho_academico_id
       ) {
-        throw new AppError("relação ja existe!!!");
+        throw new AppError("relação ja exist");
       }
     }
 
