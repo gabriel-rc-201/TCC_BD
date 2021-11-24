@@ -10,6 +10,8 @@
 
 import { Request, Response } from "express";
 import { container } from "tsyringe";
+import { AutoresRepository } from "../../../accounts/autor/repositories/implementations/AutoresRepository";
+import { OrientadoresRepository } from "../../../accounts/orientador/repositories/implementations/OrientadoresRepository";
 import { CreateRealacaoTrabalhoAutorOrientador } from "../../../trabalhoAutorOrientador/useCases/createRelacaoTrabalhoAutorOrientadorUseCase/CreateRelacaoTrabalhoAutorOrientadorUseCase";
 import { ListTrabalhoByNome } from "../listTrabalhoByNome/ListTrabalhoByNomeUseCase";
 import { CreateTrabalhoAcademicoUseCase } from "./CreateTrabalhoAcademicoUseCase";
@@ -30,6 +32,16 @@ class CreateTrabalhoAcademicoController {
     const createTrabalhoAcademicoUseCase = container.resolve(
       CreateTrabalhoAcademicoUseCase
     );
+
+    const autorRepository = new AutoresRepository();
+    const autorExists = autorRepository.findById(autor_id);
+    if (!autorExists)
+      return res.json({ mensagem: "autor não encontrado" }).status(400);
+
+    const orientadorRepository = new OrientadoresRepository();
+    const orientadorExists = orientadorRepository.findById(orientador_id);
+    if (!orientadorExists)
+      return res.json({ mensagem: "orientador não encontrado" }).status(400);
 
     try {
       await createTrabalhoAcademicoUseCase.execute({
@@ -62,7 +74,6 @@ class CreateTrabalhoAcademicoController {
     );
 
     try {
-      console.log({ autor_id: autor_id });
       await createRealacaoTrabalhoAutorOrientador.execute({
         autor_id,
         trabalho_academico_id: trabalho.id,
