@@ -17,7 +17,7 @@ class RelacaoAutorCurso {
   @CreateDateColumn()
   data_inicio: Date;
 
-  @Column()
+  @Column({ default: null })
   data_fim?: Date;
 }
 

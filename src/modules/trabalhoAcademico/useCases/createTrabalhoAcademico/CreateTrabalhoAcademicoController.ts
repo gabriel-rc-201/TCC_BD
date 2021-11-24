@@ -45,7 +45,7 @@ class CreateTrabalhoAcademicoController {
     } catch (error) {
       return res
         .status(400)
-        .json({ error, mensagem: "erro ao registrar o trabalho" });
+        .json({ error, message: "erro ao registrar o trabalho" });
     }
 
     const listTrabalhoByNome = container.resolve(ListTrabalhoByNome);
@@ -56,7 +56,7 @@ class CreateTrabalhoAcademicoController {
     } catch (error) {
       return res
         .status(400)
-        .json({ error, mensagem: "alguma merda de erro aqui O.O" });
+        .json({ error, message: "alguma merda de erro aqui O.O" });
     }
 
     const createRealacaoTrabalhoAutorOrientador = container.resolve(
@@ -72,7 +72,7 @@ class CreateTrabalhoAcademicoController {
     } catch (error) {
       return res
         .status(400)
-        .json({ error, mensage: "erro ao registrar a relação" });
+        .json({ error, message: "erro ao registrar a relação" });
     }
 
     return res.status(201).send();
