@@ -10,10 +10,17 @@ class CreateRelacaoAutorOrientadorController {
       CreateRelacaoAutorOrientadorUseCase
     );
 
-    await createRelacaoAutorOrientadorUseCase.execute({
-      autor_id,
-      orientador_id,
-    });
+    try {
+      await createRelacaoAutorOrientadorUseCase.execute({
+        autor_id,
+        orientador_id,
+      });
+    } catch (error) {
+      return res.json({
+        error,
+        message: "error ao criar a relação entre autor e orientador",
+      });
+    }
 
     return res.status(201).send();
   }

@@ -30,7 +30,9 @@ class CreateRelacaoAutorOrientadorUseCase {
         "autor não encontrado, por favor registre-se ou loge-se novamente na plataforma"
       );
 
-    const orientadorExists = await this.autorRepository.findById(orientador_id);
+    const orientadorExists = await this.orientadorRepository.findById(
+      orientador_id
+    );
     if (!orientadorExists)
       throw new AppError(
         "orientador não encontrado, por favor cheque novamente"
