@@ -57,8 +57,9 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "dominio": { "type": "string" },
-                      "universidade_id": { "type": "number" }
+                      "id": { "type": "string" },
+                      "noem": { "type": "string" },
+                      "cnpj": { "type": "string" }
                     }
                   }
                 }
@@ -100,11 +101,11 @@
                 "type": "object",
                 "properties": {
                   "dominio": { "type": "string" },
-                  "universidade_id": { "type": "number" }
+                  "universidade_id": { "type": "string" }
                 },
                 "example": {
                   "dominio": "ufc.br",
-                  "universidade_id": 1
+                  "universidade_id": "4ea50475-2cb6-4576-ba55-2a9bffacc8fc"
                 }
               }
             }
@@ -130,7 +131,7 @@
                     "type": "object",
                     "properties": {
                       "dominio": { "type": "string" },
-                      "universidade_id": { "type": "number" }
+                      "universidade_id": { "type": "string" }
                     }
                   }
                 }
@@ -152,11 +153,11 @@
                 "type": "object",
                 "properties": {
                   "nome": { "type": "string" },
-                  "universidade_id": { "type": "number" }
+                  "universidade_id": { "type": "string" }
                 },
                 "example": {
                   "nome": "UFC Campus de Sobral",
-                  "universidade_id": 1
+                  "universidade_id": "8d3888a7-cc28-468e-bcea-23397bdd5f51"
                 }
               }
             }
@@ -179,10 +180,10 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "universidade_id": { "type": "number" }
+                  "universidade_id": { "type": "string" }
                 },
                 "example": {
-                  "universidade_id": 1
+                  "universidade_id": "8d3888a7-cc28-468e-bcea-23397bdd5f51"
                 }
               }
             }
@@ -198,9 +199,9 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": { "type": "number" },
+                      "id": { "type": "string" },
                       "nome": { "type": "string" },
-                      "universidade_id": { "type": "number" }
+                      "universidade_id": { "type": "string" }
                     }
                   }
                 }
@@ -222,8 +223,8 @@
                 "type": "object",
                 "properties": {
                   "nome": { "type": "string" },
-                  "campus_id": { "type": "number" },
-                  "universidade_id": { "type": "number" },
+                  "campus_id": { "type": "string" },
+                  "universidade_id": { "type": "string" },
                   "turno": {
                     "type": "\"diurno\" | \"noturno\" | \"integral\""
                   },
@@ -233,8 +234,8 @@
                 },
                 "example": {
                   "nome": "Engenharia de Computação",
-                  "campus_id": 1,
-                  "universidade_id": 1,
+                  "campus_id": "5002ee8f-d56e-4707-bd7f-1186ba490937",
+                  "universidade_id": "8d3888a7-cc28-468e-bcea-23397bdd5f51",
                   "turno": "integral",
                   "modalidade": "bacharelado"
                 }
@@ -259,10 +260,10 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "campus_id": { "type": "number" }
+                  "campus_id": { "type": "string" }
                 },
                 "example": {
-                  "campus_id": 1
+                  "campus_id": "5002ee8f-d56e-4707-bd7f-1186ba490937"
                 }
               }
             }
@@ -278,12 +279,12 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "id": { "type": "number" },
+                      "id": { "type": "string" },
                       "nome": { "type": "string" },
                       "turno": { "type": "string" },
                       "modalidade": { "type": "string" },
-                      "campus_id": { "type": "number" },
-                      "universidade_id": { "type": "number" }
+                      "campus_id": { "type": "string" },
+                      "universidade_id": { "type": "string" }
                     }
                   }
                 }
@@ -334,8 +335,8 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "dominio": { "type": "string" },
-                      "universidade_id": { "type": "number" }
+                      "id": { "type": "string" },
+                      "nome": { "type": "string" }
                     }
                   }
                 }
@@ -367,9 +368,9 @@
     },
     "/autores": {
       "post": {
-        "tags": ["Autores Orientandos"],
-        "summary": "Cadastro de Autores Orientandos",
-        "description": "Essa rota é responsável por cadastrar os Autores Orientandos, ATENÇÃO: o email tem que ser um email instucional registrado no banco de dados",
+        "tags": ["Autores"],
+        "summary": "Cadastro de Autores",
+        "description": "Essa rota é responsável por cadastrar os Autores,\nATENÇÃO: o email tem que ser um email instucional registrado no banco de dados;\nATENÇÃO: o campo data_fim é opcional",
         "requestBody": {
           "content": {
             "application/json": {
@@ -379,13 +380,22 @@
                   "email": { "type": "string" },
                   "nome": { "type": "string" },
                   "senha": { "type": "string" },
-                  "matricula": { "type": "string" }
+                  "matricula": { "type": "string" },
+                  "curso_id": { "type": "string" },
+                  "campus_id": { "type": "string" },
+                  "universidade_id": { "type": "string" },
+                  "data_inicio": { "type": "string" },
+                  "data_fim": { "type": "string" }
                 },
                 "example": {
                   "email": "exemple@alu.ufc.br",
                   "nome": "Alguem",
                   "senha": "senha de exemplo",
-                  "matricula": "123456"
+                  "matricula": "123456",
+                  "curso_id": "b2617a42-31c0-4b64-8fe5-49d2e1030e1a",
+                  "campus_id": "92a8cbdd-b228-49a9-8e7c-1eb7fbc59694",
+                  "universidade_id": "58ec464f-2833-480f-b5cf-6068ef21fe86",
+                  "data_inicio": "2017-03-23"
                 }
               }
             }
@@ -397,9 +407,9 @@
         }
       },
       "get": {
-        "tags": ["Autores Orientandos"],
-        "summary": "Listagem de Autores Orientandos",
-        "description": "Essa rota lista todos os Autores Orientandos cadastradas no banco de dados",
+        "tags": ["Autores"],
+        "summary": "Listagem de Autores",
+        "description": "Essa rota lista todos os Autores cadastradas no banco de dados",
         "responses": {
           "200": {
             "description": "success",
@@ -410,8 +420,10 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "dominio": { "type": "string" },
-                      "universidade_id": { "type": "number" }
+                      "id": { "type": "string" },
+                      "nome": { "type": "string" },
+                      "matricula": { "type": "string" },
+                      "email": { "type": "string" }
                     }
                   }
                 }
@@ -421,11 +433,105 @@
         }
       }
     },
+    "/autores/createNome": {
+      "post": {
+        "tags": ["Autores"],
+        "summary": "Cadastro de nome em citações bibliográfias",
+        "description": "Essa rota é responsável por cadastrar os nomes em citações bibliográficas dos autores, visto que um autor pode ter vários nomes diferentes de citações bibliográficas",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": { "type": "string" },
+                  "autor_id": { "type": "string" }
+                },
+                "example": {
+                  "nome": "Alguem A.",
+                  "autor_id": "b2617a42-31c0-4b64-8fe5-49d2e1030e1a"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" },
+          "400": { "description": "Category already exists" }
+        }
+      }
+    },
+    "/autores/listNomes": {
+      "post": {
+        "tags": ["Autores"],
+        "summary": "Listagem de nomes em citações bibliográfias",
+        "description": "Essa rota é responsável por listar os nomes em citações bibliográficas dos autores, visto que um autor pode ter vários nomes diferentes de citações bibliográficas",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": { "type": "string" },
+                  "autor_id": { "type": "string" }
+                },
+                "example": {
+                  "autor_id": "b2617a42-31c0-4b64-8fe5-49d2e1030e1a"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "nome": { "type": "string" },
+                      "autor_id": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/autores/orientacao": {
+      "post": {
+        "tags": ["Autores"],
+        "summary": "Listagem de nomes em citações bibliográfias",
+        "description": "Essa rota é responsável por listar os nomes em citações bibliográficas dos autores, visto que um autor pode ter vários nomes diferentes de citações bibliográficas",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": { "type": "string" },
+                  "autor_id": { "type": "string" }
+                },
+                "example": {
+                  "autor_id": "b2617a42-31c0-4b64-8fe5-49d2e1030e1a",
+                  "orientador_id": "9cc109c4-a109-42bc-83fe-a8037c02fd52"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/orientadores": {
       "post": {
-        "tags": ["Autores Orientadores"],
-        "summary": "Cadastro de Autores Orientadores",
-        "description": "Essa rota é responsável por cadastrar os Autores Orientadores, ATENÇÃO: o email tem que ser um email instucional registrado no banco de dados",
+        "tags": ["Orientadores"],
+        "summary": "Cadastro de Orientadores",
+        "description": "Essa rota é responsável por cadastrar os Orientadores, ATENÇÃO: o email tem que ser um email instucional registrado no banco de dados",
         "requestBody": {
           "content": {
             "application/json": {
@@ -441,7 +547,7 @@
                   "email": "exemple@alu.ufc.br",
                   "nome": "Alguem",
                   "senha": "senha de exemplo",
-                  "matricula": "123456"
+                  "matricula_siape": "123456"
                 }
               }
             }
@@ -453,9 +559,9 @@
         }
       },
       "get": {
-        "tags": ["Autores Orientadores"],
-        "summary": "Listagem de Autores Orientadores",
-        "description": "Essa rota lista todos os Autores Orientadores cadastradas no banco de dados",
+        "tags": ["Orientadores"],
+        "summary": "Listagem de Orientadores",
+        "description": "Essa rota lista todos os Orientadores cadastradas no banco de dados",
         "responses": {
           "200": {
             "description": "success",
@@ -466,8 +572,9 @@
                   "items": {
                     "type": "object",
                     "properties": {
-                      "dominio": { "type": "string" },
-                      "universidade_id": { "type": "number" }
+                      "id": { "type": "string" },
+                      "nome": { "type": "string" },
+                      "email": { "type": "string" }
                     }
                   }
                 }
@@ -476,6 +583,7 @@
           }
         }
       }
-    }
+    },
+    "/trabalhos": {}
   }
 }

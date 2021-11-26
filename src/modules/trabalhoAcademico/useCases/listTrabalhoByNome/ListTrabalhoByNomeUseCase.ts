@@ -3,7 +3,7 @@ import { TrabalhosAcademicos } from "../../entities/trabalhosAcademicos";
 import { ITrabalhoAcademicoRepository } from "../../repositories/ITrabalhoAcademicoRepository";
 
 @injectable()
-class ListTrabalhoByNome {
+class ListTrabalhoByNomeUseCase {
   constructor(
     @inject("TrabalhoAcademico")
     private repository: ITrabalhoAcademicoRepository
@@ -15,4 +15,4 @@ class ListTrabalhoByNome {
   }
 }
 
-export { ListTrabalhoByNome };
+export { ListTrabalhoByNomeUseCase };

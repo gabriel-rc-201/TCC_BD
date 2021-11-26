@@ -11,7 +11,7 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 import { CreateRelacaoTrabalhoAutorOrientador } from "../../../trabalhoAutorOrientador/useCases/createRelacaoTrabalhoAutorOrientadorUseCase/CreateRelacaoTrabalhoAutorOrientadorUseCase";
-import { ListTrabalhoByNome } from "../listTrabalhoByNome/ListTrabalhoByNomeUseCase";
+import { ListTrabalhoByNomeUseCase } from "../listTrabalhoByNome/ListTrabalhoByNomeUseCase";
 import { CreateTrabalhoAcademicoUseCase } from "./CreateTrabalhoAcademicoUseCase";
 
 class CreateTrabalhoAcademicoController {
@@ -20,12 +20,13 @@ class CreateTrabalhoAcademicoController {
       titulo,
       tipo,
       nivel,
-      local_arquivo,
       local_publicacao,
       area_estudo_id,
       autor_id,
       orientador_id,
     } = req.body;
+
+    const trabalhoFile = req.file.filename;
 
     const createTrabalhoAcademicoUseCase = container.resolve(
       CreateTrabalhoAcademicoUseCase
@@ -36,7 +37,7 @@ class CreateTrabalhoAcademicoController {
         titulo,
         tipo,
         nivel,
-        local_arquivo,
+        local_arquivo: trabalhoFile,
         local_publicacao,
         area_estudo_id,
         autor_id,
@@ -48,7 +49,7 @@ class CreateTrabalhoAcademicoController {
         .json({ error, message: "erro ao registrar o trabalho" });
     }
 
-    const listTrabalhoByNome = container.resolve(ListTrabalhoByNome);
+    const listTrabalhoByNome = container.resolve(ListTrabalhoByNomeUseCase);
     let trabalho = null;
 
     try {
