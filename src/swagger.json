@@ -584,6 +584,87 @@
         }
       }
     },
-    "/trabalhos": {}
+    "/trabalhos": {
+      "post": {
+        "tags": ["Trabalhos Acadêmicos"],
+        "summary": "Cadastro de Trabalhos Acadêmicos",
+        "description": "Essa rota é responsável por cadastrar os Trabalhos Acadêmicos",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": { "type": "object" },
+              "properties": {
+                "titulo": { "type": "string" },
+                "tipo": { "type": "\"TCC\" | \"artigo\" | \"resenha\"" },
+                "nivel": {
+                  "type": "\"graduação\" | \"mestradro\" | \"doutorado\""
+                },
+                "arquivo": { "type": "string", "format": "binary" },
+                "local_publicacao": { "type": "string" },
+                "area_estudo_id": { "type": "string" },
+                "autor_id": { "type": "string" },
+                "orientador_id": { "type": "string" }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": { "description": "Created" },
+          "400": { "description": "Category already exists" }
+        }
+      },
+      "get": {
+        "tags": ["Trabalhos Acadêmicos"],
+        "summary": "Listagem de Trabalhos Acadêmicos",
+        "description": "Essa rota lista todos os Trabalhos Acadêmicos cadastradas no banco de dados",
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "titulo": { "type": "string" },
+                      "tipo": { "type": "string" },
+                      "nivel": { "type": "string" },
+                      "local_publicacao": { "type": "string" },
+                      "data_publicacao": { "type": "string" },
+                      "area_estudo_id": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/trabalhos/:titulo": {
+      "get": {
+        "tags": ["Trabalhos Acadêmicos"],
+        "summary": "Listagem de Trabalhos Acadêmicos",
+        "description": "Essa rota lista todos os Trabalhos Acadêmicos cadastradas no banco de dados",
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "arquivo": { "type": "string", "format": "binary" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
