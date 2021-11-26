@@ -47,7 +47,16 @@ class TrabalhosAcademicosRepository implements ITrabalhoAcademicoRepository {
   }
 
   async listAll(): Promise<TrabalhosAcademicos[]> {
-    const trabalhos = await this.repository.find();
+    const trabalhos = await this.repository.find({
+      select: [
+        "titulo",
+        "tipo",
+        "nivel",
+        "local_publicacao",
+        "data_publicacao",
+        "area_estudo_id",
+      ],
+    });
     return trabalhos;
   }
 
