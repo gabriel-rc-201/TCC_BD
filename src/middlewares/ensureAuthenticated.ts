@@ -13,11 +13,9 @@ export async function ensureAuthenticated(
   res: Response,
   next: NextFunction
 ) {
-  const authHeader = req.headers.authorization;
+  const token = req.headers.authorization;
 
-  if (!authHeader) throw new AppError("Token missing", 401);
-
-  const [, token] = authHeader.split(" ");
+  if (!token) throw new AppError("Token missing", 401);
 
   try {
     const { sub: user_id } = verify(
@@ -31,13 +29,12 @@ export async function ensureAuthenticated(
     const orientadorRepository = new OrientadoresRepository();
     const userOrientador = await orientadorRepository.findById(user_id);
 
-    if (!userAutor || !userOrientador)
+    if (!userAutor && !userOrientador)
       throw new AppError("User does not exists!", 401);
 
     req.user = { id: user_id };
-
     next();
-  } catch {
-    throw new AppError("Invalid token!!!", 401);
+  } catch (error) {
+    return res.status(401).json(error);
   }
 }
