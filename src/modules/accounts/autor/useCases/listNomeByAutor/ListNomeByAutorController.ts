@@ -4,7 +4,7 @@ import { ListAllNomesByAutorUseCase } from "./ListNomeByAutorUseCase";
 
 class ListAllNomesByAutorController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { autor_id } = req.body;
+    const autor_id = req.user.id;
 
     const listAllCampiUniversidadeUseCase = container.resolve(
       ListAllNomesByAutorUseCase

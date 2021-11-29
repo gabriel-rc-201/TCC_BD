@@ -4,7 +4,8 @@ import { CreateNomeUseCase } from "./CreateNomeUseCase";
 
 class CreateNomeController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { nome, autor_id } = req.body;
+    const { nome } = req.body;
+    const autor_id = req.user.id;
 
     const createNomeUseCase = container.resolve(CreateNomeUseCase);
 

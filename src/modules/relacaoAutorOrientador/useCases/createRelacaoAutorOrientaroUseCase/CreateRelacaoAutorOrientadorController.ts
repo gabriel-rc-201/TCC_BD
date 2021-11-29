@@ -4,7 +4,8 @@ import { CreateRelacaoAutorOrientadorUseCase } from "./CreateRelacaoAutorOrienta
 
 class CreateRelacaoAutorOrientadorController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { autor_id, orientador_id } = req.body;
+    const { orientador_id } = req.body;
+    const autor_id = req.user.id;
 
     const createRelacaoAutorOrientadorUseCase = container.resolve(
       CreateRelacaoAutorOrientadorUseCase

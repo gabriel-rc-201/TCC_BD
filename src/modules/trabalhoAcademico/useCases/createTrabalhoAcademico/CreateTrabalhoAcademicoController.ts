@@ -22,9 +22,9 @@ class CreateTrabalhoAcademicoController {
       nivel,
       local_publicacao,
       area_estudo_id,
-      autor_id,
       orientador_id,
     } = req.body;
+    const autor_id = req.user.id;
 
     const trabalhoFile = req.file.filename;
 
