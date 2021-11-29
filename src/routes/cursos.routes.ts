@@ -8,7 +8,7 @@ const cursosRoutes = Router();
 const listCursosByCampusController = new ListCursoByCampusController();
 const createCursoController = new CreateCursoController();
 
-cursosRoutes.post("/list/campus", listCursosByCampusController.handle);
+cursosRoutes.get("/:campus_id", listCursosByCampusController.handle);
 
 cursosRoutes.post("/", createCursoController.handle);
 

@@ -2,6 +2,7 @@ import { Router } from "express";
 import multer from "multer";
 
 import uploadConfig from "../config/upload";
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 
 import { CreateTrabalhoAcademicoController } from "../modules/trabalhoAcademico/useCases/createTrabalhoAcademico/CreateTrabalhoAcademicoController";
 import { ListAllTrabalhosAcademicosController } from "../modules/trabalhoAcademico/useCases/listAllTrabalhosAcademicos/ListAllTrabalhosAcademicosController";
@@ -20,6 +21,7 @@ const listAllTrabalhosAcademicosController =
 
 trabalhosRoutes.post(
   "/",
+  ensureAuthenticated,
   uploadTrabalho.single("arquivo"),
   createTrabalhoAcademicoController.handle
 );
