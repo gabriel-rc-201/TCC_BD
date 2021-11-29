@@ -1,4 +1,6 @@
 import { Router } from "express";
+
+import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 import { CreateAutorController } from "../modules/accounts/autor/useCases/createAutor/CreateAutorController";
 import { CreateNomeController } from "../modules/accounts/autor/useCases/createNome/CreateNoemController";
 import { ListAutoresController } from "../modules/accounts/autor/useCases/listAutores/ListAutoresController";
@@ -19,11 +21,21 @@ const createRelacaoAutorOrientadorController =
 autoresRoutes.post("/", createAutorController.handle);
 autoresRoutes.get("/", listAutoresController.handle);
 
-autoresRoutes.post("/createNome", createNomeController.handle);
-autoresRoutes.post("/listNomes", listAllNomesByAutorController.handle);
+autoresRoutes.post(
+  "/createNome",
+  ensureAuthenticated,
+  createNomeController.handle
+);
+
+autoresRoutes.get(
+  "/listNomes",
+  ensureAuthenticated,
+  listAllNomesByAutorController.handle
+);
 
 autoresRoutes.post(
   "/orientacao",
+  ensureAuthenticated,
   createRelacaoAutorOrientadorController.handle
 );
 
