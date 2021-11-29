@@ -4,7 +4,7 @@ import { ListCursoByCampusUseCase } from "./ListCursoByCampusUseCase";
 
 class ListCursoByCampusController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { campus_id } = req.body;
+    const { campus_id } = req.params;
 
     const listCursoByCampusUseCase = container.resolve(
       ListCursoByCampusUseCase

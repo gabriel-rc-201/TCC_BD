@@ -4,7 +4,7 @@ import { ListAllCampiUniversidadeUseCase } from "./ListAllCampiUniversidadeUseCa
 
 class ListAllCampiUniversidadeController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { universidade_id } = req.body;
+    const { universidade_id } = req.params;
 
     const listAllCampiUniversidadeUseCase = container.resolve(
       ListAllCampiUniversidadeUseCase
