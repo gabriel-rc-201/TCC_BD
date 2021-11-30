@@ -30,7 +30,9 @@ class CreateAutorController {
         universidade_id,
       });
     } catch (error) {
-      return res.json({ error, message: "erro ao cadastrar autor" });
+      return res
+        .status(error.statusCode || 400)
+        .json({ message: error.message });
     }
 
     const findAutorByMatricualaUseCase = container.resolve(
