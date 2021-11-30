@@ -17,9 +17,8 @@ class CreateRelacaoAutorOrientadorController {
         orientador_id,
       });
     } catch (error) {
-      return res.json({
-        error,
-        message: "error ao criar a relação entre autor e orientador",
+      return res.status(error.statusCode || 400).json({
+        message: error.message,
       });
     }
 

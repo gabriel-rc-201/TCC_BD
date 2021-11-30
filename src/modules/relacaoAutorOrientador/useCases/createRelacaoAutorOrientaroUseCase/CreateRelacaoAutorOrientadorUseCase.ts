@@ -27,7 +27,8 @@ class CreateRelacaoAutorOrientadorUseCase {
     const autorExists = await this.autorRepository.findById(autor_id);
     if (!autorExists)
       throw new AppError(
-        "autor não encontrado, por favor registre-se ou loge-se novamente na plataforma"
+        "autor não encontrado, por favor registre-se ou loge-se novamente na plataforma",
+        404
       );
 
     const orientadorExists = await this.orientadorRepository.findById(
@@ -35,7 +36,8 @@ class CreateRelacaoAutorOrientadorUseCase {
     );
     if (!orientadorExists)
       throw new AppError(
-        "orientador não encontrado, por favor cheque novamente"
+        "orientador não encontrado, por favor cheque novamente",
+        404
       );
 
     await this.relacaoRepository.create({ autor_id, orientador_id });
