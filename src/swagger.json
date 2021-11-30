@@ -15,7 +15,68 @@
       "description": "API de testes"
     }
   ],
+
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+
   "paths": {
+    "/sessions": {
+      "post": {
+        "tags": ["Loggin"],
+        "summary": "rota de loggin no sistema",
+        "description": "É por essa rota que os autores teram acesso ao sistema e poderem cadastrar os trabalhos academicos",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "matricula": { "type": "string" },
+                  "password": { "type": "string" },
+                  "isOrientador": { "type": "boolean" }
+                },
+                "example": {
+                  "matricula": "401092",
+                  "password": "123456",
+                  "isOrientador": false
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": { "description": "OK" },
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "item": {
+                  "type": "object",
+                  "properties": {
+                    "token": { "type": "string" },
+                    "user": {
+                      "type": "object",
+                      "propeties": {
+                        "name": { "type": "string" },
+                        "email": { "type": "string" },
+                        "matricula": { "type": "string" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/universidades": {
       "post": {
         "tags": ["Universidade"],
@@ -40,7 +101,7 @@
         },
         "responses": {
           "201": { "description": "Created" },
-          "400": { "description": "Category already exists" }
+          "400": { "description": "Universidade ja está registrada" }
         }
       },
       "get": {
@@ -58,7 +119,7 @@
                     "type": "object",
                     "properties": {
                       "id": { "type": "string" },
-                      "noem": { "type": "string" },
+                      "nome": { "type": "string" },
                       "cnpj": { "type": "string" }
                     }
                   }
@@ -113,7 +174,7 @@
         },
         "responses": {
           "201": { "description": "Created" },
-          "500": { "description": "Category already exists" }
+          "400": { "description": "domino ja está registrado!!!" }
         }
       },
       "get": {
@@ -145,7 +206,7 @@
       "post": {
         "tags": ["Universidade"],
         "summary": "Cadastro de campi",
-        "description": "Essa rota é responsável por cadastrar os campi das universidades",
+        "description": "Essa rota é responsável por cadastrar os campi das universidades, insira o nome do campus na propriedade campus, e o id da universidade a qual o campus pertence (consultar na rota de get /universidades)",
         "requestBody": {
           "content": {
             "application/json": {
@@ -165,30 +226,26 @@
         },
         "responses": {
           "201": { "description": "Created" },
-          "500": { "description": "Category already exists" }
+          "404": {
+            "description": "Universidade não existe!!!\nVocê não pode registrar um campus sem uma universidasde!!!"
+          },
+          "400": { "description": "esse campus ja foi registrado!!!" }
         }
       }
     },
-    "/campus/list": {
-      "post": {
+    "/campus/{universidade_id}": {
+      "get": {
         "tags": ["Universidade"],
         "summary": "Listagem de campi",
         "description": "Essa rota lista todos os campi de uma universiade cadastrados no banco de dados",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "universidade_id": { "type": "string" }
-                },
-                "example": {
-                  "universidade_id": "8d3888a7-cc28-468e-bcea-23397bdd5f51"
-                }
-              }
-            }
+        "parameters": [
+          {
+            "name": "universidade_id",
+            "in": "path",
+            "description": "a rota utiliza o id da universidade pra fazer a busca dos campus pelo banco de dados",
+            "required": true
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "success",
@@ -207,7 +264,8 @@
                 }
               }
             }
-          }
+          },
+          "404": { "description": "Universidade não registrada" }
         }
       }
     },
@@ -245,30 +303,26 @@
         },
         "responses": {
           "201": { "description": "Created" },
-          "500": { "description": "Category already exists" }
+          "400": { "description": "curso ja fou registrado!!!" },
+          "404": {
+            "description": "você pode se deparar com duas mensagens para esses erro, uma informando q a universidade não existe e outra se referindo ao campus"
+          }
         }
       }
     },
-    "/cursos/list/campus": {
-      "post": {
+    "/cursos/{campus_id}": {
+      "get": {
         "tags": ["Universidade"],
         "summary": "Listagem de cursos de um campus de uma universidade",
         "description": "Essa rota é responsável por listar todos os cursos de um capmus de uma universidade.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "campus_id": { "type": "string" }
-                },
-                "example": {
-                  "campus_id": "5002ee8f-d56e-4707-bd7f-1186ba490937"
-                }
-              }
-            }
+        "parameters": [
+          {
+            "name": "campus_id",
+            "in": "path",
+            "description": "a rota utiliza o id do campus pra fazer a busca dos cursos pelo banco de dados",
+            "required": true
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "success",
@@ -290,7 +344,9 @@
                 }
               }
             }
-          }
+          },
+          "404": { "description": "campus não encontrado" },
+          "400": { "description": "entrada invalida" }
         }
       }
     },
@@ -403,7 +459,7 @@
         },
         "responses": {
           "201": { "description": "Created" },
-          "400": { "description": "Category already exists" }
+          "400": { "description": "erro ao cadastrar autor" }
         }
       },
       "get": {
@@ -438,18 +494,17 @@
         "tags": ["Autores"],
         "summary": "Cadastro de nome em citações bibliográfias",
         "description": "Essa rota é responsável por cadastrar os nomes em citações bibliográficas dos autores, visto que um autor pode ter vários nomes diferentes de citações bibliográficas",
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nome": { "type": "string" },
-                  "autor_id": { "type": "string" }
+                  "nome": { "type": "string" }
                 },
                 "example": {
-                  "nome": "Alguem A.",
-                  "autor_id": "b2617a42-31c0-4b64-8fe5-49d2e1030e1a"
+                  "nome": "Alguem A."
                 }
               }
             }
@@ -457,31 +512,16 @@
         },
         "responses": {
           "201": { "description": "Created" },
-          "400": { "description": "Category already exists" }
+          "401": { "description": "User does not exists!" }
         }
       }
     },
     "/autores/listNomes": {
-      "post": {
+      "get": {
         "tags": ["Autores"],
         "summary": "Listagem de nomes em citações bibliográfias",
         "description": "Essa rota é responsável por listar os nomes em citações bibliográficas dos autores, visto que um autor pode ter vários nomes diferentes de citações bibliográficas",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "nome": { "type": "string" },
-                  "autor_id": { "type": "string" }
-                },
-                "example": {
-                  "autor_id": "b2617a42-31c0-4b64-8fe5-49d2e1030e1a"
-                }
-              }
-            }
-          }
-        },
+        "security": [{ "bearerAuth": [] }],
         "responses": {
           "200": {
             "description": "success",
@@ -508,22 +548,26 @@
         "tags": ["Autores"],
         "summary": "Listagem de nomes em citações bibliográfias",
         "description": "Essa rota é responsável por listar os nomes em citações bibliográficas dos autores, visto que um autor pode ter vários nomes diferentes de citações bibliográficas",
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nome": { "type": "string" },
-                  "autor_id": { "type": "string" }
+                  "orientador_id": { "type": "string" }
                 },
                 "example": {
-                  "autor_id": "b2617a42-31c0-4b64-8fe5-49d2e1030e1a",
                   "orientador_id": "9cc109c4-a109-42bc-83fe-a8037c02fd52"
                 }
               }
             }
           }
+        },
+        "responses": {
+          "201": { "description": "Created" },
+          "404": { "description": "Autor ou orientador não foi encontrado" },
+          "400": { "description": "erro do usuário" }
         }
       }
     },
@@ -555,7 +599,7 @@
         },
         "responses": {
           "201": { "description": "Created" },
-          "400": { "description": "Category already exists" }
+          "400": { "description": "Orientador Already Exists!!!!" }
         }
       },
       "get": {
@@ -580,7 +624,8 @@
                 }
               }
             }
-          }
+          },
+          "500": { "description": "aconteceu alguma coisa muito errada aqui" }
         }
       }
     },
@@ -589,6 +634,7 @@
         "tags": ["Trabalhos Acadêmicos"],
         "summary": "Cadastro de Trabalhos Acadêmicos",
         "description": "Essa rota é responsável por cadastrar os Trabalhos Acadêmicos",
+        "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
             "multipart/form-data": {
@@ -602,7 +648,6 @@
                 "arquivo": { "type": "string", "format": "binary" },
                 "local_publicacao": { "type": "string" },
                 "area_estudo_id": { "type": "string" },
-                "autor_id": { "type": "string" },
                 "orientador_id": { "type": "string" }
               }
             }
@@ -610,7 +655,9 @@
         },
         "responses": {
           "201": { "description": "Created" },
-          "400": { "description": "Category already exists" }
+          "404": {
+            "description": "erro em algum dos campos, autor, orientador ou trabalho não encontrado"
+          }
         }
       },
       "get": {
@@ -638,15 +685,24 @@
                 }
               }
             }
-          }
+          },
+          "500": { "description": "um erro muito doido aqui mano" }
         }
       }
     },
-    "/trabalhos/:titulo": {
+    "/trabalhos/{titulo}": {
       "get": {
         "tags": ["Trabalhos Acadêmicos"],
         "summary": "Listagem de Trabalhos Acadêmicos",
         "description": "Essa rota lista todos os Trabalhos Acadêmicos cadastradas no banco de dados",
+        "parameters": [
+          {
+            "name": "titulo",
+            "in": "path",
+            "description": "a rota utiliza o titulo do trabalho academico pra fazer a busca dos trabalhos pelo banco de dados",
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "success",
@@ -662,7 +718,8 @@
                 }
               }
             }
-          }
+          },
+          "404": { "description": "trabalho não encontrado" }
         }
       }
     }
