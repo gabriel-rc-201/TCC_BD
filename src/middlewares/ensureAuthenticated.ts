@@ -13,9 +13,10 @@ export async function ensureAuthenticated(
   res: Response,
   next: NextFunction
 ) {
-  const token = req.headers.authorization;
+  const authHeader = req.headers.authorization;
 
-  if (!token) throw new AppError("Token missing", 401);
+  if (!authHeader) throw new AppError("Token missing", 401);
+  const [, token] = authHeader.split(" ");
 
   try {
     const { sub: user_id } = verify(
@@ -35,6 +36,6 @@ export async function ensureAuthenticated(
     req.user = { id: user_id };
     next();
   } catch (error) {
-    return res.status(401).json(error);
+    return res.status(401).json({ message: error.message });
   }
 }
