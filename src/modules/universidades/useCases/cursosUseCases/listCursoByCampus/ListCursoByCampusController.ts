@@ -10,7 +10,14 @@ class ListCursoByCampusController {
       ListCursoByCampusUseCase
     );
 
-    const all = await listCursoByCampusUseCase.execute(campus_id);
+    const all = { cursos: [] };
+    try {
+      all.cursos = await listCursoByCampusUseCase.execute(campus_id);
+    } catch (error) {
+      return res
+        .status(error.statusCode || 400)
+        .json({ message: error.message });
+    }
 
     return res.json(all);
   }
