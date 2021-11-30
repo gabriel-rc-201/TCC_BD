@@ -5,7 +5,9 @@ import { ListAutoresUseCase } from "./ListAutoresUseCase";
 class ListAutoresController {
   async handle(req: Request, res: Response): Promise<Response> {
     const listAutoresUseCase = container.resolve(ListAutoresUseCase);
+
     const all = { autores: [] };
+
     try {
       all.autores = await listAutoresUseCase.execute();
     } catch (error) {

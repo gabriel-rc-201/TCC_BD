@@ -6,13 +6,20 @@ class ListAllNomesByAutorController {
   async handle(req: Request, res: Response): Promise<Response> {
     const autor_id = req.user.id;
 
-    const listAllCampiUniversidadeUseCase = container.resolve(
+    const listAllNomesByAutorUseCase = container.resolve(
       ListAllNomesByAutorUseCase
     );
 
-    const all = await listAllCampiUniversidadeUseCase.execute(autor_id);
+    const all = { nomes: [] };
+    try {
+      all.nomes = await listAllNomesByAutorUseCase.execute(autor_id);
+    } catch (error) {
+      return res
+        .status(error.statusCode || 400)
+        .json({ message: error.message });
+    }
 
-    return res.json(all);
+    return res.json(all.nomes);
   }
 }
 
