@@ -46,13 +46,15 @@ class CreateTrabalhoAcademicoUseCase {
     const areaExists = await this.areaRepository.findById(area_estudo_id);
     if (!areaExists)
       throw new AppError(
-        "Area de estudo não encontrada, verifica o códio da área de estudo"
+        "Area de estudo não encontrada, verifica o códio da área de estudo",
+        404
       );
 
     const autorExists = await this.autorRepository.findById(autor_id);
     if (!autorExists)
       throw new AppError(
-        "Falha ao registrar o trabalho acadêmico, autor não encontrado"
+        "Falha ao registrar o trabalho acadêmico, autor não encontrado",
+        404
       );
 
     const orientadorExists = await this.orientadorRepository.findById(
@@ -60,7 +62,8 @@ class CreateTrabalhoAcademicoUseCase {
     );
     if (!orientadorExists)
       throw new AppError(
-        "Falha ao registrar o trabalho acadêmico, orientador não encontrado"
+        "Falha ao registrar o trabalho acadêmico, orientador não encontrado",
+        404
       );
 
     const trabalhoExists = await this.trabalhoRepository.findByTitulo(titulo);

@@ -6,7 +6,12 @@ class ListOrientadoresController {
   async handle(req: Request, res: Response): Promise<Response> {
     const listOrientadoresUseCase = container.resolve(ListOrientadoresUseCase);
 
-    const all = await listOrientadoresUseCase.execute();
+    const all = { orientadores: [] };
+    try {
+      all.orientadores = await listOrientadoresUseCase.execute();
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
 
     return res.json(all);
   }

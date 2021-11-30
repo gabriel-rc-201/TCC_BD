@@ -8,12 +8,18 @@ class CreateOrientadorController {
 
     const createOrientadorUseCase = container.resolve(CreateOrientadorUseCase);
 
-    await createOrientadorUseCase.execute({
-      email,
-      nome,
-      senha,
-      matricula_siape,
-    });
+    try {
+      await createOrientadorUseCase.execute({
+        email,
+        nome,
+        senha,
+        matricula_siape,
+      });
+    } catch (error) {
+      return res
+        .status(error.statusCode || 400)
+        .json({ message: error.message });
+    }
 
     return res.status(201).send();
   }

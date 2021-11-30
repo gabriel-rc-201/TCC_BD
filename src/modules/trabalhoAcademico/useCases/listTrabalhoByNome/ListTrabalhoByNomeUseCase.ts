@@ -1,4 +1,5 @@
 import { inject, injectable } from "tsyringe";
+import { AppError } from "../../../../errors/AppErros";
 import { TrabalhosAcademicos } from "../../entities/trabalhosAcademicos";
 import { ITrabalhoAcademicoRepository } from "../../repositories/ITrabalhoAcademicoRepository";
 
@@ -11,6 +12,9 @@ class ListTrabalhoByNomeUseCase {
 
   async execute(titulo: string): Promise<TrabalhosAcademicos> {
     const trabalho = await this.repository.findByTitulo(titulo);
+
+    if (!trabalho) throw new AppError("trabalho não encontrado", 404);
+
     return trabalho;
   }
 }

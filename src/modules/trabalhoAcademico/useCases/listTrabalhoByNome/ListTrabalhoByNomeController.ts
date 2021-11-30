@@ -12,19 +12,26 @@ class ListTrabalhoByNomeController {
       ListTrabalhoByNomeUseCase
     );
 
-    const trabalho = await listTrabalhoByNomeUseCase.execute(titulo);
+    const tb = { trabalho: null };
+    try {
+      tb.trabalho = await listTrabalhoByNomeUseCase.execute(titulo);
+    } catch (error) {
+      return res
+        .status(error.statusCode || 500)
+        .json({ message: error.message });
+    }
 
     const file = fs.createReadStream(
-      process.cwd() + "/trabalhos/" + trabalho.local_arquivo
+      process.cwd() + "/trabalhos/" + tb.trabalho.local_arquivo
     );
     const stat = fs.statSync(
-      process.cwd() + "/trabalhos/" + trabalho.local_arquivo
+      process.cwd() + "/trabalhos/" + tb.trabalho.local_arquivo
     );
     res.setHeader("Content-Length", stat.size);
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename=${trabalho.local_arquivo}`
+      `attachment; filename=${tb.trabalho.local_arquivo}`
     );
     file.pipe(res);
     return res;

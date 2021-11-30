@@ -45,19 +45,19 @@ class CreateTrabalhoAcademicoController {
       });
     } catch (error) {
       return res
-        .status(400)
-        .json({ error, message: "erro ao registrar o trabalho" });
+        .status(error.statusCode || 400)
+        .json({ message: error.message });
     }
 
     const listTrabalhoByNome = container.resolve(ListTrabalhoByNomeUseCase);
-    let trabalho = null;
+    const trabalho = { trabalho: null };
 
     try {
-      trabalho = await listTrabalhoByNome.execute(titulo);
+      trabalho.trabalho = await listTrabalhoByNome.execute(titulo);
     } catch (error) {
       return res
-        .status(400)
-        .json({ error, message: "alguma merda de erro aqui O.O" });
+        .status(error.statusCode || 400)
+        .json({ message: error.message });
     }
 
     const createRealacaoTrabalhoAutorOrientador = container.resolve(
@@ -67,13 +67,13 @@ class CreateTrabalhoAcademicoController {
     try {
       await createRealacaoTrabalhoAutorOrientador.execute({
         autor_id,
-        trabalho_academico_id: trabalho.id,
+        trabalho_academico_id: trabalho.trabalho.id,
         orientador_id,
       });
     } catch (error) {
       return res
-        .status(400)
-        .json({ error, message: "erro ao registrar a relação" });
+        .status(error.statusCode || 400)
+        .json({ message: error.message });
     }
 
     return res.status(201).send();

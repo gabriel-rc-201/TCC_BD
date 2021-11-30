@@ -8,8 +8,14 @@ class ListAllTrabalhosAcademicosController {
       ListAllTrabalhosAcademicosUseCase
     );
 
-    const trabalhos = await listAllTrabalhosAcademicosUseCase.execute();
-    return res.json(trabalhos);
+    const all = { trabalhos: [] };
+    try {
+      all.trabalhos = await listAllTrabalhosAcademicosUseCase.execute();
+    } catch (error) {
+      return res.status(500).json({ message: error.message });
+    }
+
+    return res.json(all.trabalhos);
   }
 }
 
