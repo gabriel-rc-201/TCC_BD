@@ -9,7 +9,7 @@ interface ICampusDTO {
 interface ICampiRepository {
   listCampiUniversidade(universidade_id: string): Promise<Campus[]>;
   findByNome(nome: string): Promise<Campus>;
-  findById({ id, universidade_id }: ICampusDTO): Promise<Campus>;
+  findById(campus_id: string): Promise<Campus>;
   create({ id, nome, universidade_id }: ICampusDTO): Promise<void>;
 }
 

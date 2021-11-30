@@ -39,17 +39,16 @@ class CreateCursoUseCase {
 
     if (!universidadeExists)
       throw new AppError(
-        "Universidade não existe!!!\nVocê não pode registrar um curso sem uma universidasde!!!"
+        "Universidade não existe!!!\nVocê não pode registrar um curso sem uma universidasde!!!",
+        404
       );
 
-    const campusExists = await this.campusRepository.findById({
-      id: campus_id,
-      universidade_id,
-    });
+    const campusExists = await this.campusRepository.findById(campus_id);
 
     if (!campusExists)
       throw new AppError(
-        "Campus não existe!!!\nVocê não pode registrar um curso sem um campus!!!"
+        "Campus não existe!!!\nVocê não pode registrar um curso sem um campus!!!",
+        404
       );
 
     const cursoExists = await this.cursoRepository.findEspecificCourse(
