@@ -25,7 +25,8 @@ class CreateCampusUseCase {
 
     if (!universidadeExists)
       throw new AppError(
-        "Universidade não existe!!!\nVocê não pode registrar um campus sem uma universidasde!!!"
+        "Universidade não existe!!!\nVocê não pode registrar um campus sem uma universidasde!!!",
+        404
       );
 
     const campusExists = await this.campusRepository.findByNome(nome);
