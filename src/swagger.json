@@ -546,8 +546,8 @@
     "/autores/orientacao": {
       "post": {
         "tags": ["Autores"],
-        "summary": "Listagem de nomes em citações bibliográfias",
-        "description": "Essa rota é responsável por listar os nomes em citações bibliográficas dos autores, visto que um autor pode ter vários nomes diferentes de citações bibliográficas",
+        "summary": "Cadastrar relação entre autor e orientador",
+        "description": "Essa rota é responsável por cadastrar as relações entre autores e orientadores",
         "security": [{ "bearerAuth": [] }],
         "requestBody": {
           "content": {
