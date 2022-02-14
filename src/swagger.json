@@ -693,8 +693,8 @@
     "/trabalhos/{titulo}": {
       "get": {
         "tags": ["Trabalhos Acadêmicos"],
-        "summary": "Listagem de Trabalhos Acadêmicos",
-        "description": "Essa rota lista todos os Trabalhos Acadêmicos cadastradas no banco de dados",
+        "summary": "Listagem de Trabalhos Acadêmicos com esse título",
+        "description": "Essa rota lista todos os Trabalhos Acadêmicos que tenham esse título",
         "parameters": [
           {
             "name": "titulo",
